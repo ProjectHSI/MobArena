@@ -1,0 +1,6 @@
+[08:23:08] [ServerMain/WARN]: [oshi.util.platform.windows.PerfDataUtil] Failed to add PDH Counter: \Paging File(_Total)\% Usage, Error code: 0xC0000BB8
+[08:23:08] [ServerMain/WARN]: [oshi.util.platform.windows.PerfCounterQueryHandler] Failed to add counter for PDH counter: \Paging File(_Total)\% Usage
+[08:23:08] [ServerMain/WARN]: [oshi.util.platform.windows.PerfCounterQuery] Disabling further attempts to query Paging File.
+[08:23:11] [ServerMain/WARN]: [oshi.util.platform.windows.WmiQueryHandler] COM exception: Invalid Query: SELECT PERCENTUSAGE FROM Win32_PerfRawData_PerfOS_PagingFile
+[08:23:20] [ServerMain/WARN]: Failed to load eula.txt
+[08:23:20] [ServerMain/INFO]: You need to agree to the EULA in order to run the server. Go to eula.txt for more info.

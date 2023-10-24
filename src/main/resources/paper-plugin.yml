@@ -1,0 +1,5 @@
+name: MobArena
+version: '${version}'
+main: io.github.projecthsi.mobarena.plugin.MobArena
+loader: io.github.projecthsi.mobarena.plugin.MobArenaLoader
+api-version: '1.20'
