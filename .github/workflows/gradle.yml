@@ -39,6 +39,7 @@ jobs:
       uses: ncipollo/release-action@v1
       id: create_release
       with:
+        latest: true
         draft: false
         prerelease: true
         artifacts: "build/libs/MobArena-SNAPSHOT-1.0.0.jar"
