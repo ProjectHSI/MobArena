@@ -45,6 +45,8 @@ public class PlayerManagement {
 
         arenaPlayers.add(player);
 
+        arena.setPlayers(arenaPlayers);
+
         return true;
     }
 
