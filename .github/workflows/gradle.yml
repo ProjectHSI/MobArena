@@ -36,7 +36,7 @@ jobs:
 
     steps:
       - name: Publish Release
-        uses: Shopify/upload-to-release@v1
+        uses: Shopify/upload-to-release
         with:
           name: MobArena.jar
           path: build/libs/MobArena-SNAPSHOT-1.0.0.jar
