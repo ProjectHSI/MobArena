@@ -1,17 +1,18 @@
 package io.github.projecthsi.mobarena.containers;
 
+import io.github.projecthsi.mobarena.arena.Arena;
 import org.bukkit.entity.Player;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 
 public class PlayerContainer {
-    private static ArrayList<Player> trackedPlayers = new ArrayList<>();
+    private static HashMap<Player, Arena> trackedPlayers = new HashMap<>();
 
-    public static void setTrackedPlayers(ArrayList<Player> newTrackedPlayers) {
+    public static void setTrackedPlayers(HashMap<Player, Arena> newTrackedPlayers) {
         trackedPlayers = newTrackedPlayers;
     }
 
-    public static ArrayList<Player> getTrackedPlayers() {
+    public static HashMap<Player, Arena> getTrackedPlayers() {
         return trackedPlayers;
     }
 }
