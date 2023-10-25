@@ -16,6 +16,7 @@ public final class MobArena extends JavaPlugin {
         Instance = this;
 
         getServer().getCommandMap().register("MiniMessageTest", ":", new MiniMessageTest());
+        getServer().getCommandMap().register("MobArena", ":", new MobArena());
         getServer().getCommandMap().register("MobArenaAdmin", ":", new MobArenaAdmin());
         getServer().getCommandMap().register("MobArenaDebug", ":", new MobArenaDebug());
         getServer().getPluginManager().registerEvents(new EventSystem(), this);
