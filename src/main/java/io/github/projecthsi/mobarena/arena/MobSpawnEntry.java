@@ -39,7 +39,7 @@ public class MobSpawnEntry {
     }
 
     public boolean shouldSpawn(int round) {
-        return round < spawnRound;
+        return round >= spawnRound;
     }
 
     public int getSpawnCount(int round) {
