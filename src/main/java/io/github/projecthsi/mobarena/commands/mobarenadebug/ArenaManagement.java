@@ -19,13 +19,13 @@ public class ArenaManagement {
             return false;
         }
 
-        try {
+        //try {
             ArenaContainer.getInstance().getArena(args[0]).game();
             return true;
-        } catch (Exception e) {
-            sender.sendMessage("mad error; invalid arena");
-            return false;
-        }
+        //} catch (Exception e) {
+        //    sender.sendMessage("mad error; invalid arena");
+        //    return false;
+        //}
     }
 
     static boolean createDebugArena(@NotNull CommandSender sender, @NotNull String commandLabel, @NotNull String[] args) {
