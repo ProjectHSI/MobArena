@@ -1,5 +1,0 @@
-name: MobArena
-version: '1.0-SNAPSHOT'
-main: io.github.projecthsi.mobarena.plugin.MobArena
-loader: io.github.projecthsi.mobarena.plugin.MobArenaLoader
-api-version: '1.20'
