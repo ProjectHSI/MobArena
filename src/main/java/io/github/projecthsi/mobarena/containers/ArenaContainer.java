@@ -1,6 +1,7 @@
 package io.github.projecthsi.mobarena.containers;
 
 import io.github.projecthsi.mobarena.arena.Arena;
+import io.github.projecthsi.mobarena.plugin.MobArena;
 
 import java.util.HashMap;
 
@@ -18,10 +19,13 @@ public class ArenaContainer {
     }
 
     public void addArena(String arenaName, Arena arenaInstance) throws Exception {
+        MobArena.getInstance().getLogger().info("Checkpoint 1 for AddArena");
         if (arenas.containsKey(arenaName)) {
             throw new Exception("Arena already exists.");
         }
+        MobArena.getInstance().getLogger().info("Checkpoint 2 for AddArena");
         arenas.put(arenaName, arenaInstance);
+        MobArena.getInstance().getLogger().info("Checkpoint 3 for AddArena");
     }
 
     public Arena getArena(String arenaName) {
