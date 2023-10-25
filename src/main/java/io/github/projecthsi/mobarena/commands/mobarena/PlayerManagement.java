@@ -2,6 +2,7 @@ package io.github.projecthsi.mobarena.commands.mobarena;
 
 import io.github.projecthsi.mobarena.arena.Arena;
 import io.github.projecthsi.mobarena.commands.CommandInteractions;
+import io.github.projecthsi.mobarena.containers.ArenaContainer;
 import io.github.projecthsi.mobarena.containers.PlayerContainer;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -27,11 +28,22 @@ public class PlayerManagement {
             return false;
         }
 
-        HashMap<Player, Arena> playersInContainer = PlayerContainer.getTrackedPlayers();
-
-        if (playersInContainer.containsKey(player)) {
+        if (PlayerContainer.getTrackedPlayers().containsKey(player)) {
             CommandInteractions.displayError(sender, "You are already in an arena.");
+
+            return false;
         }
+
+        if (!ArenaContainer.getInstance().arenaExists(args[1])) {
+            CommandInteractions.displayError(sender, "That arena does not exist.");
+
+            return false;
+        }
+
+        Arena arena = ArenaContainer.getInstance().getArena(args[1]);
+        ArrayList<Player> arenaPlayers = arena.getPlayers();
+
+        arenaPlayers.add(player);
 
         return true;
     }
