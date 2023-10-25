@@ -9,6 +9,9 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.Arrays;
 
+import static io.github.projecthsi.mobarena.commands.mobarena.PlayerManagement.joinPlayer;
+import static io.github.projecthsi.mobarena.commands.mobarena.PlayerManagement.leavePlayer;
+
 public class MobArena extends Command {
     public MobArena() {
         super("mobarena",
@@ -49,10 +52,10 @@ public class MobArena extends Command {
                 return true;
 
             case "joinArena":
-                return joinArena(sender, commandLabel, args);
+                return joinPlayer(sender, commandLabel, args);
 
             case "removeArena":
-                return leaveArena(sender, commandLabel, args);
+                return leavePlayer(sender, commandLabel, args);
 
             default:
                 CommandInteractions.displayError(sender, "Invalid subcommand.");
