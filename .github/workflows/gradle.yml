@@ -46,6 +46,6 @@ jobs:
           draft: false
           prerelease: true
           name: ${{ steps.version.outputs.version }}
-          tagName: ${{ steps.version.outputs.version }}
+          tag: ${{ steps.version.outputs.version }}
         env:
           GITHUB_TOKEN: ${{ github.token }}
