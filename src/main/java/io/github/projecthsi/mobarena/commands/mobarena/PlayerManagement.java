@@ -59,7 +59,7 @@ public class PlayerManagement {
         }
 
         Arena arena = playersInContainer.get(player);
-        \
+
         ArrayList<Player> arenaPlayers = arena.getPlayers();
         arenaPlayers.remove(player);
 
