@@ -19,6 +19,11 @@ public class ArenaManagement {
             return false;
         }
 
+        if (!ArenaContainer.getInstance().arenaExists(args[1])) {
+            sender.sendMessage("arena doesn't exist.");
+            return false;
+        }
+
         //try {
             ArenaContainer.getInstance().getArena(args[0]).game();
             return true;
