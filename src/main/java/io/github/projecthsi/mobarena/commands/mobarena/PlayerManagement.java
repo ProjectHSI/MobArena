@@ -47,6 +47,10 @@ public class PlayerManagement {
 
         arena.setPlayers(arenaPlayers);
 
+        HashMap<Player, Arena> players = PlayerContainer.getTrackedPlayers();
+        players.put(player, arena);
+        PlayerContainer.setTrackedPlayers(players);
+
         return true;
     }
 
@@ -78,6 +82,10 @@ public class PlayerManagement {
         arenaPlayers.remove(player);
 
         arena.setPlayers(arenaPlayers);
+
+        HashMap<Player, Arena> players = PlayerContainer.getTrackedPlayers();
+        players.remove(player);
+        PlayerContainer.setTrackedPlayers(players);
 
         return true;
     }

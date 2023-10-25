@@ -86,7 +86,8 @@ public class Arena {
     private void teleportPlayers() {
         for (Player trackedPlayer : trackedPlayers) {
             trackedPlayer.teleport(getRandomPositionFromFillArea(spawnPoints.get("arena").getFillArea()));
-            PlayerContainer.getTrackedPlayers().add(trackedPlayer);
+            // I think this is done in joinArena().
+            // PlayerContainer.getTrackedPlayers().put(trackedPlayer);
         }
     }
     //</editor-fold>
