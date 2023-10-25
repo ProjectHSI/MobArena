@@ -92,6 +92,11 @@ public class ArenaManagement {
             return false;
         }
 
+        if (ArenaContainer.getInstance().arenaExists("test_arena")) {
+            sender.sendMessage("failed to create test arena for some reason.");
+            return false;
+        }
+
         sender.sendMessage("created test arena.");
         return true;
     }
