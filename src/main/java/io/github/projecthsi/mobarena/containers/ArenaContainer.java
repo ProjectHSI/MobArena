@@ -1,7 +1,6 @@
 package io.github.projecthsi.mobarena.containers;
 
 import io.github.projecthsi.mobarena.arena.Arena;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;
 
