@@ -37,6 +37,7 @@ jobs:
     steps:
       - uses: Shopify/upload-to-release@v1.0.1
         with:
+          id: test
           name: MobArena.jar
           path: build/libs/MobArena-SNAPSHOT-1.0.0.jar
           repo-token: ${{ secrets.GITHUB_TOKEN }}
