@@ -1,19 +1,32 @@
 package io.github.projecthsi.mobarena;
 
+import io.github.projecthsi.mobarena.plugin.MobArena;
+
 import java.util.Random;
 
 public class MathExtensions {
     private static Random random = new Random();
 
     public static double getRandomNumberWithinRange(double min, double max) {
-        if (min > max) {
+        MobArena.getInstance().getLogger().info("min: " + min);
+        MobArena.getInstance().getLogger().info("max: " + max);
+
+        if (min < max) {
+            MobArena.getInstance().getLogger().info("inverting numbers");
             double oldMin = min;
             double oldMax = max;
             min = oldMax;
             max = oldMin;
+
+            MobArena.getInstance().getLogger().info("nmin: " + min);
+            MobArena.getInstance().getLogger().info("nmax: " + max);
         }
 
-        return (random.nextDouble() * max) + min;
+        double number = min + (max - min) * random.nextDouble();
+
+        MobArena.getInstance().getLogger().info("rng: " + number);
+
+        return number;
     }
 
     public static Random getRandom() {
