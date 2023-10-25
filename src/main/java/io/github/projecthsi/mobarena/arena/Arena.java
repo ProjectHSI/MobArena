@@ -78,7 +78,11 @@ public class Arena {
 
     private void spawnMobs(int wave) {
         for (MobSpawnEntry mobSpawnEntry : mobSpawnEntries) {
+            MobArena.getInstance().getLogger().info("spawn entry yippee");
+
             if (!mobSpawnEntry.shouldSpawn(wave)) continue;
+            MobArena.getInstance().getLogger().info("we gain invincibility for 1/35th of a second");
+            MobArena.getInstance().getLogger().info("Woohoo!");
 
             SpawnPoint spawnPoint = spawnPoints.get(mobSpawnEntry.getSpawnPoint());
             World spawnWorld = spawnPoint.getFillArea().getWorld();
