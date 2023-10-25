@@ -1,7 +1,6 @@
 package io.github.projecthsi.mobarena.commands.mobarenadebug;
 
 import io.github.projecthsi.mobarena.commands.CommandInteractions;
-import io.github.projecthsi.mobarena.containers.ArenaContainer;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -52,6 +51,9 @@ public class MobArenaDebug extends Command {
 
             case "forceStartArena":
                 return ArenaManagement.forceStartArena(sender, commandLabel, args);
+
+            case "createTestArena":
+                return ArenaManagement.createDebugArena(sender, commandLabel, args);
 
             default:
                 CommandInteractions.displayError(sender, "Invalid subcommand.");
