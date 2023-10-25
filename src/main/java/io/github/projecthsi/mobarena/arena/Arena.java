@@ -3,7 +3,6 @@ package io.github.projecthsi.mobarena.arena;
 import io.github.projecthsi.mobarena.FillArea;
 import io.github.projecthsi.mobarena.MathExtensions;
 import io.github.projecthsi.mobarena.containers.EntityContainer;
-import io.github.projecthsi.mobarena.containers.PlayerContainer;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.title.Title;
 import org.bukkit.Location;
