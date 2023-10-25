@@ -25,11 +25,7 @@ public class ArenaContainer {
         arenas.put(arenaName, arenaInstance);
     }
 
-    @NotNull
-    public Arena getArena(String arenaName) throws Exception {
-        if (!arenas.containsKey(arenaName)) {
-            throw new Exception("Arena does not exist.");
-        }
+    public Arena getArena(String arenaName) {
         return arenas.get(arenaName);
     }
 
