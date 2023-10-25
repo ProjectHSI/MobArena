@@ -41,7 +41,7 @@ jobs:
       with:
         draft: false
         prerelease: true
-        artifacts: [ "build/libs/MobArena-SNAPSHOT-1.0.0.jar" ]
+        artifacts: "build/libs/MobArena-SNAPSHOT-1.0.0.jar"
         name: ${{ steps.version.outputs.version }}
         tag: ${{ steps.version.outputs.version }}
         generateReleaseNotes: true
