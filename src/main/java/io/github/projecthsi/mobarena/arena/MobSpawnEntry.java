@@ -1,16 +1,16 @@
 package io.github.projecthsi.mobarena.arena;
 
-import org.bukkit.entity.Mob;
+import org.bukkit.entity.EntityType;
 
 public class MobSpawnEntry {
-    private Mob mob;
+    private EntityType mob;
 
     private int amount;
     private int spawnRound;
     private int modulo;
     private String spawnPoint;
 
-    public MobSpawnEntry(Mob mob, int amount, int spawnRound, int modulo, String spawnPoint) {
+    public MobSpawnEntry(EntityType mob, int amount, int spawnRound, int modulo, String spawnPoint) {
         this.mob = mob;
         this.amount = amount;
         this.spawnRound = spawnRound;
@@ -18,7 +18,7 @@ public class MobSpawnEntry {
         this.spawnPoint = spawnPoint;
     }
 
-    public Mob getMob() {
+    public EntityType getMob() {
         return mob;
     }
 

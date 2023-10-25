@@ -75,7 +75,7 @@ public class Arena {
             World spawnWorld = spawnPoint.getFillArea().getWorld();
 
             for (int i = 0; i < mobSpawnEntry.getSpawnCount(wave); i++) {
-                Entity newEntity = spawnWorld.spawnEntity(getRandomPositionFromFillArea(spawnPoint.getFillArea()), mobSpawnEntry.getMob().getType());
+                Entity newEntity = spawnWorld.spawnEntity(getRandomPositionFromFillArea(spawnPoint.getFillArea()), mobSpawnEntry.getMob());
                 trackedMobs.add((Mob) newEntity);
                 EntityContainer.getTrackedMobs().add((Mob) newEntity);
             }
