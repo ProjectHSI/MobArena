@@ -23,29 +23,24 @@ jobs:
       with:
         java-version: '17'
         distribution: 'microsoft'
+
     - name: Build with Gradle
       uses: gradle/gradle-build-action@bd5760595778326ba7f1441bcf7e88b49de61a25 # v2.6.0
       with:
         arguments: build
 
-  publish:
-    name: Publish
+    - name: Get Version
+      run: echo "::set-output name=version::$(git rev-parse --short "$GITHUB_SHA")"
+      id: version
 
-    runs-on: ubuntu-latest
-    needs: [ build ]
-
-    steps:
-      - name: Get Version
-        run: echo "::set-output name=version::$(git rev-parse --short "$GITHUB_SHA")"
-        id: version
-
-      - name: Create Release
-        uses: ncipollo/release-action@v1
-        id: create_release
-        with:
-          draft: false
-          prerelease: true
-          name: ${{ steps.version.outputs.version }}
-          tag: ${{ steps.version.outputs.version }}
-        env:
-          GITHUB_TOKEN: ${{ github.token }}
+    - name: Create Release
+      uses: ncipollo/release-action@v1
+      id: create_release
+      with:
+        draft: false
+        prerelease: true
+        name: ${{ steps.version.outputs.version }}
+        tag: ${{ steps.version.outputs.version }}
+        generateReleaseNotes: true
+      env:
+        GITHUB_TOKEN: ${{ github.token }}
