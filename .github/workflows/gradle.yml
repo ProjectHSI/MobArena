@@ -35,9 +35,16 @@ jobs:
     needs: [ build ]
 
     steps:
-      - uses: Shopify/upload-to-release@v1.0.1
+      - name: Get Version
+        run: echo "::set-output name=version::$(git rev-parse --short "$GITHUB_SHA")"
+        id: version
+
+      - name: Create Release
+        uses: ncipollo/release-action@v1
+        id: create_release
         with:
-          id: test
-          name: MobArena.jar
-          path: build/libs/MobArena-SNAPSHOT-1.0.0.jar
-          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          draft: false
+          prerelease: true
+          name: ${{ steps.version.outputs.version }}
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
