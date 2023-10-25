@@ -62,7 +62,7 @@ public class ArenaManagement {
                 ),
                 new Location(
                         Bukkit.getServer().getWorld("mob_arena"),
-                        20, -60, -20
+                        -20, -60, 20
                 ),
                 Bukkit.getServer().getWorld("mob_arena")
         );
@@ -78,7 +78,7 @@ public class ArenaManagement {
                 ),
                 new Location(
                         Bukkit.getServer().getWorld("mob_arena"),
-                        4, -60, -4
+                        -4, -60, 4
                 ),
                 Bukkit.getServer().getWorld("mob_arena")
         );
