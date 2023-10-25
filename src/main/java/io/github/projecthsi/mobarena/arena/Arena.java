@@ -63,11 +63,17 @@ public class Arena {
         continueGame = true;
         currentRound = 1;
         teleportPlayers();
+
+        MobArena.getInstance().getServer().getScheduler().runTaskTimer(MobArena.getInstance(), this::wave, 20L, 100L);
+
         gameInProgress = false;
     }
 
     private void wave() {
         spawnMobs(currentRound);
+        currentRound++;
+        actionBarToAllPlayers(MiniMessage.miniMessage().deserialize("<yellow>coolness!!! " + currentRound + " </yellow>"));
+        Bukkit.broadcast(MiniMessage.miniMessage().deserialize("asdfasdfasdfasdf " + currentRound));
     }
 
     private void spawnMobs(int wave) {
@@ -79,6 +85,12 @@ public class Arena {
 
             for (int i = 0; i < mobSpawnEntry.getSpawnCount(wave); i++) {
                 Entity newEntity = spawnWorld.spawnEntity(getRandomPositionFromFillArea(spawnPoint.getFillArea()), mobSpawnEntry.getMob());
+                newEntity.teleport(new Location(
+                        spawnWorld,
+                        MathExtensions.getRandomNumberWithinRange(spawnPoint.getFillArea().getPos1().x(), spawnPoint.getFillArea().getPos2().x()),
+                        MathExtensions.getRandomNumberWithinRange(spawnPoint.getFillArea().getPos1().y(), spawnPoint.getFillArea().getPos2().y()),
+                        MathExtensions.getRandomNumberWithinRange(spawnPoint.getFillArea().getPos1().z(), spawnPoint.getFillArea().getPos2().z())
+                ));
                 trackedMobs.add((Mob) newEntity);
                 EntityContainer.getTrackedMobs().add((Mob) newEntity);
             }
