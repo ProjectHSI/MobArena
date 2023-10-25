@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class PlayerManagement {
-    boolean joinPlayer(@NotNull CommandSender sender, @NotNull String commandLabel, @NotNull String[] args) {
+    static boolean joinPlayer(@NotNull CommandSender sender, @NotNull String commandLabel, @NotNull String[] args) {
         if (args.length != 1 + 1) {
             CommandInteractions.displayError(sender, "This subcommand must have 1 argument.");
             CommandInteractions.displayUsage(sender, commandLabel + " joinArena <arena>");
@@ -36,7 +36,7 @@ public class PlayerManagement {
         return true;
     }
 
-    boolean leavePlayer(@NotNull CommandSender sender, @NotNull String commandLabel, @NotNull String[] args) {
+    static boolean leavePlayer(@NotNull CommandSender sender, @NotNull String commandLabel, @NotNull String[] args) {
         if (args.length != 0 + 1) {
             CommandInteractions.displayError(sender, "This subcommand must be run with 0 arguments.");
             CommandInteractions.displayUsage(sender, commandLabel + " leaveArena");
