@@ -4,6 +4,7 @@ import io.github.projecthsi.mobarena.arena.Arena;
 import io.github.projecthsi.mobarena.commands.CommandInteractions;
 import io.github.projecthsi.mobarena.containers.ArenaContainer;
 import io.github.projecthsi.mobarena.containers.PlayerContainer;
+import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
@@ -51,6 +52,8 @@ public class PlayerManagement {
         players.put(player, arena);
         PlayerContainer.setTrackedPlayers(players);
 
+        sender.sendMessage(MiniMessage.miniMessage().deserialize("You have joined <bold>" + arena.getName() + "</bold>"));
+
         return true;
     }
 
@@ -86,6 +89,8 @@ public class PlayerManagement {
         HashMap<Player, Arena> players = PlayerContainer.getTrackedPlayers();
         players.remove(player);
         PlayerContainer.setTrackedPlayers(players);
+
+        sender.sendMessage(MiniMessage.miniMessage().deserialize("You have left <bold>" + arena.getName() + "</bold>"));
 
         return true;
     }
