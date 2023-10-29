@@ -16,6 +16,6 @@ public class PlayerEventHandler implements Listener {
             return;
         }
 
-        PlayerContainer.getTrackedPlayers().get(event.getPlayer()).playerDeath();
+        PlayerContainer.getTrackedPlayers().get(event.getPlayer()).playerDeath(event.getPlayer());
     }
 }
