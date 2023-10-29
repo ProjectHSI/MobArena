@@ -3,6 +3,7 @@ package io.github.projecthsi.mobarena.arena;
 import io.github.projecthsi.mobarena.FillArea;
 import io.github.projecthsi.mobarena.MathExtensions;
 import io.github.projecthsi.mobarena.containers.EntityContainer;
+import io.github.projecthsi.mobarena.containers.PlayerContainer;
 import io.github.projecthsi.mobarena.plugin.MobArena;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.minimessage.MiniMessage;
@@ -142,8 +143,14 @@ public class Arena {
         }
     }
 
-    public void playerDeath() {
+    public void playerDeath(Player player) {
+        trackedPlayers.remove(player);
 
+        HashMap<Player, Arena> trackedPlayersHashmap = PlayerContainer.getTrackedPlayers();
+
+        trackedPlayersHashmap.remove(player);
+
+        PlayerContainer.setTrackedPlayers(trackedPlayersHashmap);
     }
 
     public void entityDeath() {
