@@ -90,14 +90,17 @@ public class Arena {
 
             for (int i = 0; i < mobSpawnEntry.getSpawnCount(wave); i++) {
                 Entity newEntity = spawnWorld.spawnEntity(getRandomPositionFromFillArea(spawnPoint.getFillArea()), mobSpawnEntry.getMob());
+
                 newEntity.teleport(new Location(
                         spawnWorld,
                         MathExtensions.getRandomNumberWithinRange(spawnPoint.getFillArea().getPos1().x(), spawnPoint.getFillArea().getPos2().x()),
                         MathExtensions.getRandomNumberWithinRange(spawnPoint.getFillArea().getPos1().y(), spawnPoint.getFillArea().getPos2().y()),
                         MathExtensions.getRandomNumberWithinRange(spawnPoint.getFillArea().getPos1().z(), spawnPoint.getFillArea().getPos2().z())
                 ));
+
                 trackedMobs.add((Mob) newEntity);
-                EntityContainer.getTrackedMobs().add((Mob) newEntity);
+
+                EntityContainer.getTrackedMobs().put((Mob) newEntity, this);
             }
         }
     }
@@ -153,7 +156,7 @@ public class Arena {
         PlayerContainer.setTrackedPlayers(trackedPlayersHashmap);
     }
 
-    public void entityDeath() {
+    public void entityDeath(Mob mob) {
 
     }
     //</editor-fold>
