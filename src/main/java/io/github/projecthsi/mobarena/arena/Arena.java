@@ -141,6 +141,14 @@ public class Arena {
             throw new RuntimeException(e);
         }
     }
+
+    public void playerDeath() {
+
+    }
+
+    public void entityDeath() {
+
+    }
     //</editor-fold>
 
     //<editor-fold>
