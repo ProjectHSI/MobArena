@@ -111,7 +111,7 @@ public class Arena {
     //</editor-fold>
 
     //<editor-fold desc="Checks">
-    public void mobSpawnEntryCheck() throws Exception {
+    private void mobSpawnEntryCheck() throws Exception {
         for (MobSpawnEntry mobSpawnEntry : mobSpawnEntries) {
             boolean mobSpawnEntryIsOk = false;
 
@@ -126,7 +126,7 @@ public class Arena {
         }
     }
 
-    public void spawnPointsCheck() throws Exception {
+    private void spawnPointsCheck() throws Exception {
         if (spawnPoints.containsKey("arena")) {
             throw new Exception("Arena must contain the 'arena' spawn point.");
         }
