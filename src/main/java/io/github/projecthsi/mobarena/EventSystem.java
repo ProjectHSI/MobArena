@@ -1,14 +1,14 @@
 package io.github.projecthsi.mobarena;
 
-import org.bukkit.event.EventHandler;
-import org.bukkit.event.Listener;
-import org.bukkit.event.player.PlayerJoinEvent;
+import io.github.projecthsi.mobarena.plugin.MobArena;
 
-import static io.github.projecthsi.mobarena.plugin.MobArena.getInstance;
+import static org.bukkit.Bukkit.getServer;
 
 public class EventSystem implements Listener {
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent event) {
         getInstance().getLogger().info("player joined! " + event.getPlayer().getName());
+public class EventSystem {
+    public static void registerEvents() {
     }
 }

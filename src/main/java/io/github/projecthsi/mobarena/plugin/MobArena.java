@@ -19,7 +19,7 @@ public final class MobArena extends JavaPlugin {
         getServer().getCommandMap().register("MobArena", ":", new io.github.projecthsi.mobarena.commands.mobarena.MobArena());
         getServer().getCommandMap().register("MobArenaAdmin", ":", new MobArenaAdmin());
         getServer().getCommandMap().register("MobArenaDebug", ":", new MobArenaDebug());
-        getServer().getPluginManager().registerEvents(new EventSystem(), this);
+        EventSystem.registerEvents();
     }
 
     @Override
