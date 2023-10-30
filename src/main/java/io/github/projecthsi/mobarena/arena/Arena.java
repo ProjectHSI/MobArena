@@ -88,9 +88,6 @@ public class Arena {
 
     private void wave() {
         spawnMobs(currentRound);
-        currentRound++;
-        actionBarToAllPlayers(MiniMessage.miniMessage().deserialize("<yellow>coolness!!! " + currentRound + " </yellow>"));
-        Bukkit.broadcast(MiniMessage.miniMessage().deserialize("asdfasdfasdfasdf " + currentRound));
     }
 
     private void spawnMobs(int wave) {
@@ -181,8 +178,6 @@ public class Arena {
     }
 
     public void playerDeath(Player player) {
-        trackedPlayers.remove(player);
-
         HashMap<Player, Arena> trackedPlayersHashmap = PlayerContainer.getTrackedPlayers();
 
         trackedPlayersHashmap.remove(player);
