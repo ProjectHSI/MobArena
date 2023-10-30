@@ -89,6 +89,11 @@ public class ArenaManagement {
 
         arena.setMobSpawnEntries(mobSpawnEntries);
         arena.setSpawnPoints(spawnPoints);
+        arena.setLobbySpawnLocation(new Location(
+                Bukkit.getServer().getWorld("mob_arena"),
+                0, -49, -24
+
+        ));
 
         try {
             ArenaContainer.getInstance().addArena("test_arena", arena);
