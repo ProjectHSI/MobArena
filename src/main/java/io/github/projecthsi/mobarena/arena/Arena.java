@@ -173,6 +173,8 @@ public class Arena {
         }
     }
 
+    private void gameManager() {
+        MobArena.getInstance().getServer().getGlobalRegionScheduler().runAtFixedRate(MobArena.getInstance(), this::gameLoop, 1, 1);
     }
 
     private void wave() {
