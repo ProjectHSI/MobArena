@@ -81,6 +81,36 @@ public class Arena {
 
         teleportPlayers();
 
+    private NamedTextColor generateCurrentPlayerTextColour(int players, int maxPlayers) {
+        int _1Third = maxPlayers / 3;
+        int _2Thirds = maxPlayers / 3 * 2;
+
+        if (players <= _2Thirds) {
+            if (players <= _1Third) {
+                return NamedTextColor.RED;
+            } else {
+                return NamedTextColor.YELLOW;
+            }
+        } else {
+            return NamedTextColor.GREEN;
+        }
+    }
+
+    private NamedTextColor generateCurrentMobTextColour(int mobs, int maxMobs) {
+        int _1Third = maxMobs / 3;
+        int _2Thirds = maxMobs / 3 * 2;
+
+        if (mobs <= _2Thirds) {
+            if (mobs <= _1Third) {
+                return NamedTextColor.GREEN;
+            } else {
+                return NamedTextColor.YELLOW;
+            }
+        } else {
+            return NamedTextColor.RED;
+        }
+    }
+
 
     }
 
