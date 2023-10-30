@@ -165,6 +165,14 @@ public class Arena {
         return actionBarComponent;
     }
 
+    private void gameLoop(ScheduledTask scheduledTask) {
+        actionBarToAllPlayers(generateActionBarText());
+
+        if (mobs == 0) {
+            wave();
+        }
+    }
+
     }
 
     private void wave() {
