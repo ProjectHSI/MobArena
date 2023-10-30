@@ -25,7 +25,7 @@ public class ArenaManagement {
         }
 
         //try {
-            ArenaContainer.getInstance().getArena(args[1]).game();
+            ArenaContainer.getInstance().getArena(args[1]).startGame();
             return true;
         //} catch (Exception e) {
         //    sender.sendMessage("mad error; invalid arena");
