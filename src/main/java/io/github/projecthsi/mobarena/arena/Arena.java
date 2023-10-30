@@ -25,6 +25,7 @@ public class Arena {
     private HashMap<String, SpawnPoint> spawnPoints;
     private ArrayList<Player> trackedPlayers = new ArrayList<>();
     private ArrayList<Mob> trackedMobs = new ArrayList<>();
+    private Location lobbySpawnLocation;
 
     private boolean gameInProgress = false;
 
@@ -196,6 +197,14 @@ public class Arena {
 
     public void setPlayers(ArrayList<Player> players) {
         this.trackedPlayers = players;
+    }
+
+    public Location getLobbySpawnLocation() {
+        return lobbySpawnLocation;
+    }
+
+    public void setLobbySpawnLocation(Location lobbySpawnLocation) {
+        this.lobbySpawnLocation = lobbySpawnLocation;
     }
     //</editor-fold>
 }
