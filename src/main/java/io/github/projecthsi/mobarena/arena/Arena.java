@@ -72,7 +72,9 @@ public class Arena {
 
     public void startGame() {
         gameInProgress = true;
+
         continueGame = true;
+
         currentRound = 1;
         teleportPlayers();
 
