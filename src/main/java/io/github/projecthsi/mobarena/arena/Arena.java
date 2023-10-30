@@ -155,6 +155,9 @@ public class Arena {
         trackedPlayersHashmap.remove(player);
 
         PlayerContainer.setTrackedPlayers(trackedPlayersHashmap);
+
+        player.setHealth(20);
+        player.teleport(lobbySpawnLocation);
     }
 
     public void entityDeath(Mob mob) {
