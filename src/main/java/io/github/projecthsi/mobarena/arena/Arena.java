@@ -82,7 +82,6 @@ public class Arena {
         teleportPlayers();
 
 
-        gameInProgress = false;
     }
 
     private void wave() {
