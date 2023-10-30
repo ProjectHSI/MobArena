@@ -111,6 +111,59 @@ public class Arena {
         }
     }
 
+    private Component generateActionBarText() {
+        final String baseWavePlaceholder = "<yellow><wave></yellow>";
+
+        TagResolver waveNumberPlaceholder = Formatter.number("wave", currentRound);
+
+        Component waveComponentPlaceholder = MiniMessage.miniMessage().deserialize(baseWavePlaceholder, waveNumberPlaceholder);
+
+        TagResolver wavePlaceholder = Placeholder.component("wave", waveComponentPlaceholder);
+
+
+
+        final String basePlayersPlaceholder = "<player_colour><players></player_colour>/<green><max_players></green>";
+
+        NamedTextColor playersTextColor = generateCurrentPlayerTextColour(players, maxPlayers);
+
+        TagResolver playersNumberPlaceholder = Formatter.number("players", players);
+        TagResolver maxPlayersNumberPlaceholder = Formatter.number("max_players", maxPlayers);
+        TagResolver playerColoursPlaceholder = Placeholder.styling("player_colour", playersTextColor);
+
+        Component playersComponentPlaceholder = MiniMessage.miniMessage().deserialize(basePlayersPlaceholder,
+                playersNumberPlaceholder,
+                maxPlayersNumberPlaceholder,
+                playerColoursPlaceholder);
+
+        TagResolver playersPlaceholder = Placeholder.component("players", playersComponentPlaceholder);
+
+
+
+        final String baseMobsPlaceholder = "<mob_colour><mobs></mob_colour>/<red><max_mobs></red>";
+
+        NamedTextColor mobsTextColor = generateCurrentMobTextColour(mobs, maxMobs);
+
+        TagResolver mobsNumberPlaceholder = Formatter.number("mobs", mobs);
+        TagResolver maxMobsNumberPlaceholder = Formatter.number("max_mobs", maxMobs);
+        TagResolver mobColoursPlaceholder = Placeholder.styling("mob_colour", mobsTextColor);
+
+        Component mobsComponentPlaceholder = MiniMessage.miniMessage().deserialize(baseMobsPlaceholder,
+                mobsNumberPlaceholder,
+                maxMobsNumberPlaceholder,
+                mobColoursPlaceholder);
+
+        TagResolver mobsPlaceholder = Placeholder.component("mobs", mobsComponentPlaceholder);
+
+
+
+        final String baseMiniMessage = "<yellow>Wave:</yellow> <wave>" + "<br>" +
+                "<green>Players:</green> <players>" + "<br>" +
+                "<red>Mobs:</red> <mobs>";
+
+        Component actionBarComponent = MiniMessage.miniMessage().deserialize(baseMiniMessage, wavePlaceholder, playersPlaceholder, mobsPlaceholder);
+
+        return actionBarComponent;
+    }
 
     }
 
