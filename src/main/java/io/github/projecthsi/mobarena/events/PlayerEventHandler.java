@@ -23,5 +23,8 @@ public class PlayerEventHandler implements Listener
         }
 
         PlayerContainer.getTrackedPlayers().get(event.getPlayer()).playerDeath(event.getPlayer());
+
+        // we don't want to kill the player, so we cancel it here.
+        event.setCancelled(true);
     }
 }
