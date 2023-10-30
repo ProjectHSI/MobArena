@@ -70,7 +70,7 @@ public class Arena {
     private boolean continueGame;
     private int currentRound;
 
-    public void game() {
+    public void startGame() {
         gameInProgress = true;
         continueGame = true;
         currentRound = 1;
