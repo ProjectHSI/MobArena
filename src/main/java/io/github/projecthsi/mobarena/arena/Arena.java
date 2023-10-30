@@ -94,12 +94,18 @@ public class Arena {
     }
 
     private void spawnMobs(int wave) {
+        mobs = 0;
+
         for (MobSpawnEntry mobSpawnEntry : mobSpawnEntries) {
             MobArena.getInstance().getLogger().info("spawn entry yippee");
 
             if (!mobSpawnEntry.shouldSpawn(wave)) continue;
             MobArena.getInstance().getLogger().info("we gain invincibility for 1/35th of a second");
             MobArena.getInstance().getLogger().info("Woohoo!");
+
+            int spawnCount = mobSpawnEntry.getSpawnCount(wave);
+
+            mobs += spawnCount;
 
             SpawnPoint spawnPoint = spawnPoints.get(mobSpawnEntry.getSpawnPoint());
             World spawnWorld = spawnPoint.getFillArea().getWorld();
@@ -129,6 +135,8 @@ public class Arena {
                 });
             }
         }
+
+        maxMobs = mobs;
     }
 
     private void teleportPlayers() {
