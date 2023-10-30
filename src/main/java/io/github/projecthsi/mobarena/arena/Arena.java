@@ -190,7 +190,15 @@ public class Arena {
     }
 
     public void entityDeath(Mob mob) {
+        trackedMobs.remove(mob);
 
+        HashMap<Mob, Arena> trackedMobsHashmap = EntityContainer.getTrackedMobs();
+
+        trackedMobsHashmap.remove(mob);
+
+        EntityContainer.setTrackedMobs(trackedMobsHashmap);
+
+        mobs -= 1;
     }
     //</editor-fold>
 
