@@ -93,15 +93,28 @@ public class Arena {
                 Entity newEntity = spawnWorld.spawnEntity(getRandomPositionFromFillArea(spawnPoint.getFillArea()), mobSpawnEntry.getMob());
 
                 newEntity.teleport(new Location(
+                Location spawnLocation = new Location(
                         spawnWorld,
                         MathExtensions.getRandomNumberWithinRange(spawnPoint.getFillArea().getPos1().x(), spawnPoint.getFillArea().getPos2().x()),
                         MathExtensions.getRandomNumberWithinRange(spawnPoint.getFillArea().getPos1().y(), spawnPoint.getFillArea().getPos2().y()),
                         MathExtensions.getRandomNumberWithinRange(spawnPoint.getFillArea().getPos1().z(), spawnPoint.getFillArea().getPos2().z())
-                ));
+                );
 
-                trackedMobs.add((Mob) newEntity);
+                // needed for Folia support.
+                MobArena.getInstance().getServer().getRegionScheduler().execute(MobArena.getInstance(), spawnLocation, () -> {
+                    Entity newEntity = spawnWorld.spawnEntity(getRandomPositionFromFillArea(spawnPoint.getFillArea()), mobSpawnEntry.getMob());
 
-                EntityContainer.getTrackedMobs().put((Mob) newEntity, this);
+                    // same here.
+                    newEntity.getScheduler().execute(MobArena.getInstance(), () -> {
+                        newEntity.teleport(spawnLocation);
+                    }, null, 0);
+
+                    // we don't need to run these in the entity scheduler, as we're not performing tasks on an entity.
+                    // we're doing casting and adding to an array, not entity tasks.
+                    trackedMobs.add((Mob) newEntity);
+
+                    EntityContainer.getTrackedMobs().put((Mob) newEntity, this);
+                });
             }
         }
     }
