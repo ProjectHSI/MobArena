@@ -81,7 +81,6 @@ public class Arena {
 
         teleportPlayers();
 
-        MobArena.getInstance().getServer().getScheduler().runTaskTimer(MobArena.getInstance(), this::wave, 20L, 100L);
 
         gameInProgress = false;
     }
