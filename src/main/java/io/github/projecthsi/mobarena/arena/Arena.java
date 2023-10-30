@@ -5,6 +5,7 @@ import io.github.projecthsi.mobarena.MathExtensions;
 import io.github.projecthsi.mobarena.containers.EntityContainer;
 import io.github.projecthsi.mobarena.containers.PlayerContainer;
 import io.github.projecthsi.mobarena.plugin.MobArena;
+import io.papermc.paper.threadedregions.scheduler.ScheduledTask;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import net.kyori.adventure.title.Title;
@@ -89,10 +90,7 @@ public class Arena {
             SpawnPoint spawnPoint = spawnPoints.get(mobSpawnEntry.getSpawnPoint());
             World spawnWorld = spawnPoint.getFillArea().getWorld();
 
-            for (int i = 0; i < mobSpawnEntry.getSpawnCount(wave); i++) {
-                Entity newEntity = spawnWorld.spawnEntity(getRandomPositionFromFillArea(spawnPoint.getFillArea()), mobSpawnEntry.getMob());
-
-                newEntity.teleport(new Location(
+            for (int i = 0; i < spawnCount; i++) {
                 Location spawnLocation = new Location(
                         spawnWorld,
                         MathExtensions.getRandomNumberWithinRange(spawnPoint.getFillArea().getPos1().x(), spawnPoint.getFillArea().getPos2().x()),
