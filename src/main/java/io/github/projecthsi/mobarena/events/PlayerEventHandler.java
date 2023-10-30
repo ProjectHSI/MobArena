@@ -13,6 +13,9 @@ public class PlayerEventHandler implements Listener
     // we have a low priority here. this is to allow other plugins to have non-absolute god mode.
     @EventHandler(priority = EventPriority.LOWEST)
     public void onPlayerDeath(PlayerDeathEvent event) {
+        // same reason here.
+        if (!event.isCancelled()) return;
+
         getInstance().getLogger().info(String.format("Player death; %s", event.getPlayer().getName()));
 
         if (!PlayerContainer.getTrackedPlayers().containsKey(event.getPlayer())) {
