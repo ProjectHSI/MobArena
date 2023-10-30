@@ -10,6 +10,8 @@ import static io.github.projecthsi.mobarena.plugin.MobArena.getInstance;
 
 public class PlayerEventHandler implements Listener
 {
+    // we have a low priority here. this is to allow other plugins to have non-absolute god mode.
+    @EventHandler(priority = EventPriority.LOWEST)
     public void onPlayerDeath(PlayerDeathEvent event) {
         getInstance().getLogger().info(String.format("Player death; %s", event.getPlayer().getName()));
 
