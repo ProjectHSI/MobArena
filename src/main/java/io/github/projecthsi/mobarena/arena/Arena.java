@@ -76,6 +76,9 @@ public class Arena {
         continueGame = true;
 
         currentRound = 1;
+
+        maxPlayers = trackedPlayers.size();
+
         teleportPlayers();
 
         MobArena.getInstance().getServer().getScheduler().runTaskTimer(MobArena.getInstance(), this::wave, 20L, 100L);
