@@ -87,6 +87,7 @@ public class Arena {
     }
 
     private void wave() {
+        currentRound++;
         spawnMobs(currentRound);
     }
 
