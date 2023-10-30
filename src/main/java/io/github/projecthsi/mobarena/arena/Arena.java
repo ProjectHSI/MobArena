@@ -81,6 +81,9 @@ public class Arena {
 
         teleportPlayers();
 
+        gameManager();
+    }
+
     private NamedTextColor generateCurrentPlayerTextColour(int players, int maxPlayers) {
         int _1Third = maxPlayers / 3;
         int _2Thirds = maxPlayers / 3 * 2;
