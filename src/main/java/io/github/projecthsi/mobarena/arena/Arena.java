@@ -31,6 +31,12 @@ public class Arena {
     private ArrayList<Mob> trackedMobs = new ArrayList<>();
     private Location lobbySpawnLocation;
 
+    int maxPlayers;
+    int players;
+
+    int maxMobs;
+    int mobs;
+
     private boolean gameInProgress = false;
 
     //<editor-fold desc="Game Controllers">
