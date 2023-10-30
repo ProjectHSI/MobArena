@@ -1,5 +1,8 @@
 # Mob Arena
 
+[![Build MobArena](https://github.com/ProjectHSI/MobArena/actions/workflows/gradle.yml/badge.svg)](https://github.com/ProjectHSI/MobArena/actions/workflows/gradle.yml)
+[![CodeQL](https://github.com/ProjectHSI/MobArena/actions/workflows/codeql.yml/badge.svg)](https://github.com/ProjectHSI/MobArena/actions/workflows/codeql.yml)
+
 Currently under development, Mob Arena is planning to be a wave-based mob survival.
 
 # Release Schedule
@@ -14,7 +17,7 @@ Releases are simply made whenever I feel a certain change I was making is ready.
 
 They'll be labelled as a release (unless I'm running a beta test) and will be named with the Semantic Version scheming.
 
-If the release is labelled as a pre release, the version will be the next version with build metadata attached.
+If the release is labelled as a pre-release, the version will be the next version with build metadata attached.
 
 ## Nightly
 
