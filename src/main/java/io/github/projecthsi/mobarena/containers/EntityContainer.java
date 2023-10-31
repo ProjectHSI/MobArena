@@ -12,6 +12,7 @@ public class EntityContainer {
     /**
      * @deprecated Usage of this method is not recommended due to thread safety reasons. Use the indirect methods.
      */
+    @Deprecated
     public static void setTrackedMobs(HashMap<Mob, Arena> newTrackedMobs) {
         trackedMobs = newTrackedMobs;
     }
@@ -39,6 +40,7 @@ public class EntityContainer {
     /**
      * @deprecated Usage of this method is not recommended due to thread safety reasons. Use the indirect methods.
      */
+    @Deprecated
     public static HashMap<Mob, Arena> getTrackedMobs() {
         return trackedMobs;
     }
