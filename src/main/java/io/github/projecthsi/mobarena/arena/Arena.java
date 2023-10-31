@@ -171,6 +171,13 @@ public class Arena {
     private void gameLoop(ScheduledTask scheduledTask) {
         actionBarToAllPlayers(generateActionBarText());
 
+        for (Player player : trackedPlayers) {
+            player.getScheduler().execute(MobArena.getInstance(), () -> {
+                player.setFoodLevel(20);
+                player.setSaturation(20);
+            }, null, 0);
+        }
+
         if (mobs == 0) {
             wave();
         }
