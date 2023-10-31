@@ -9,6 +9,9 @@ import java.util.HashMap;
 public class EntityContainer {
     private static HashMap<Mob, Arena> trackedMobs = new HashMap<>();
 
+    /**
+     * @deprecated Usage of this method is not recommended due to thread safety reasons. Use the indirect methods.
+     */
     public static void setTrackedMobs(HashMap<Mob, Arena> newTrackedMobs) {
         trackedMobs = newTrackedMobs;
     }
@@ -33,6 +36,9 @@ public class EntityContainer {
         return trackedMobs.containsKey(mob);
     }
 
+    /**
+     * @deprecated Usage of this method is not recommended due to thread safety reasons. Use the indirect methods.
+     */
     public static HashMap<Mob, Arena> getTrackedMobs() {
         return trackedMobs;
     }
