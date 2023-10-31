@@ -1,7 +1,6 @@
 package io.github.projecthsi.mobarena.events;
 
 import io.github.projecthsi.mobarena.containers.EntityContainer;
-import io.github.projecthsi.mobarena.containers.PlayerContainer;
 import org.bukkit.entity.Mob;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
