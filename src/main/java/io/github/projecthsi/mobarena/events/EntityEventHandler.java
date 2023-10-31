@@ -5,8 +5,8 @@ import org.bukkit.entity.Entity;
 import org.bukkit.entity.Mob;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.entity.EntityCombustEvent;
 import org.bukkit.event.entity.EntityDeathEvent;
+import org.bukkit.event.entity.ExplosionPrimeEvent;
 
 import static io.github.projecthsi.mobarena.plugin.MobArena.getInstance;
 
@@ -36,7 +36,7 @@ public class EntityEventHandler implements Listener {
     }
 
     @EventHandler
-    public void onEntityCombust(EntityCombustEvent event) {
+    public void onEntityCombust(ExplosionPrimeEvent event) {
         mobDeathEvent(event.getEntity());
     }
 }
