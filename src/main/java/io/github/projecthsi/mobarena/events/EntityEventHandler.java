@@ -36,7 +36,7 @@ public class EntityEventHandler implements Listener {
     }
 
     @EventHandler
-    public void onEntityCombust(ExplosionPrimeEvent event) {
+    public void onExplosionPrimeEvent(ExplosionPrimeEvent event) {
         mobDeathEvent(event.getEntity());
     }
 }
