@@ -33,4 +33,9 @@ public class EntityEventHandler implements Listener {
     public void onEntityDeath(EntityDeathEvent event) {
         mobDeathEvent(event.getEntity());
     }
+
+    @EventHandler
+    public void onEntityCombust(EntityCombustEvent event) {
+        mobDeathEvent(event.getEntity());
+    }
 }
