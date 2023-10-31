@@ -187,6 +187,24 @@ public class Arena {
         MobArena.getInstance().getServer().getGlobalRegionScheduler().runAtFixedRate(MobArena.getInstance(), this::gameLoop, 1, 1);
     }
 
+    private void setupKitForPlayer(Player player) {
+        PlayerInventory playerInventory = player.getInventory();
+
+        playerInventory.clear();
+
+        playerInventory.setItem(0, new ItemStack(Material.IRON_SWORD));
+        playerInventory.setItem(1, new ItemStack(Material.CROSSBOW));
+        playerInventory.setItem(0 /* Target Inventory Slot */ + (9 /* Columns/Row */ * (3 /* Target Inventory Row */ - 1)), new ItemStack(Material.ARROW));
+        playerInventory.setHeldItemSlot(0);
+
+        playerInventory.setHelmet(new ItemStack(Material.IRON_HELMET));
+        playerInventory.setChestplate(new ItemStack(Material.IRON_CHESTPLATE));
+        playerInventory.setLeggings(new ItemStack(Material.IRON_LEGGINGS));
+        playerInventory.setBoots(new ItemStack(Material.IRON_BOOTS));
+
+        playerInventory.setItemInOffHand(new ItemStack(Material.SHIELD));
+    }
+
     private void wave() {
         currentRound++;
         spawnMobs(currentRound);
