@@ -206,8 +206,8 @@ public class Arena {
     }
 
     private void wave() {
-        currentRound++;
         spawnMobs(currentRound);
+        currentRound++;
     }
 
     private void spawnMobs(int wave) {
