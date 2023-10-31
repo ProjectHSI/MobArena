@@ -207,6 +207,15 @@ public class Arena {
 
     private void wave() {
         spawnMobs(currentRound);
+
+        for (Player player : trackedPlayers) {
+            player.getScheduler().execute(MobArena.getInstance(), () -> {
+                player.setHealth(20);
+
+                setupKitForPlayer(player);
+            }, null, 0);
+        }
+
         currentRound++;
     }
 
