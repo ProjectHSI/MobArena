@@ -223,7 +223,7 @@ public class Arena {
                     // we're doing casting and adding to an array, not entity tasks.
                     trackedMobs.add((Mob) newEntity);
 
-                    EntityContainer.getTrackedMobs().put((Mob) newEntity, this);
+                    EntityContainer.addTrackedMob((Mob) newEntity, this);
                 });
             }
         }
