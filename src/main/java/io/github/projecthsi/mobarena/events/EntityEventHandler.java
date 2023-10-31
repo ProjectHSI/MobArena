@@ -20,7 +20,7 @@ public class EntityEventHandler implements Listener {
 
         getInstance().getLogger().info(String.format("Entity death; %s", event.getEntity().getName()));
 
-        if (!PlayerContainer.getTrackedPlayers().containsKey(mob)) {
+        if (!EntityContainer.containsTrackedMob(mob)) {
             return;
         }
 
