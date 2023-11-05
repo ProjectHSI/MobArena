@@ -4,8 +4,8 @@ usingNonMainBranch=false
 
 ls /usr/bin/
 
-commitHash=$("/usr/bin/git rev-parse --short HEAD")
-branchName=$("/usr/bin/git rev-parse --abbrev-ref HEAD")
+commitHash=$(/usr/bin/git rev-parse --short HEAD)
+branchName=$(/usr/bin/git rev-parse --abbrev-ref HEAD)
 
 version=""
 
