@@ -20,11 +20,11 @@ public class Container<I, V> {
      * @deprecated Usage of this method is not recommended due to thread safety reasons. Use the indirect methods.
      */
     @Deprecated
-    public void setTrackedMobs(HashMap<I, V> newTrackedMobs) {
+    public void setTracked(HashMap<I, V> newTrackedMobs) {
         tracked = newTrackedMobs;
     }
 
-    public void addTrackedMob(I index, V value) {
+    public void addTracked(I index, V value) {
         try {
             writeLock.lock();
             tracked.put(index, value);
