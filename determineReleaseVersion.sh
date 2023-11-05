@@ -7,14 +7,14 @@ branchName=$("git rev-parse --abbrev-ref HEAD")
 
 version=""
 
-if [ $branchName == "main" ]; then
+if [[ $branchName == "main" ]]; then
     usingNonMainBranch=false
 fi
 
-version="$(commitHash)"
+version="$($commitHash)"
 
-if [ $usingNonMainBranch == true ]; then
-    version="$(version)-$(branchName)"
+if [[ $usingNonMainBranch = true ]]; then
+    version="$($version)-$($branchName)"
 fi
 
-echo "VersionID=$(version)" >> "$GITHUB_OUTPUT"
+echo "VersionID=$($version)" >> "$GITHUB_OUTPUT"
