@@ -2,11 +2,11 @@ name: Build MobArena
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "**" ]
   pull_request:
-    branches: [ "main" ]
+    branches: [ "**" ]
   workflow_dispatch:
-    branches: [ "main" ]
+    branches: [ "**" ]
 
 permissions:
   contents: write
