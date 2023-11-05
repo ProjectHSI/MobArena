@@ -19,4 +19,6 @@ if [[ $usingNonMainBranch = true ]]; then
     version="$($version)-$($branchName)"
 fi
 
+echo "Calculated Version: '$($version)'."
+
 echo "VersionID=$($version)" >> "$GITHUB_OUTPUT"
