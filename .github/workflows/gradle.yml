@@ -32,10 +32,7 @@ jobs:
         arguments: build
 
     - name: Get Version
-      run: |
-        echo "Multi-Step Execution Test
-        echo "::set-output name=version::$(git rev-parse --short "$GITHUB_SHA")"
-        echo "End"
+      run: "bash determineReleaseVersion.sh -xe"
       id: version
 
     - name: Create Release
@@ -46,8 +43,8 @@ jobs:
         draft: false
         prerelease: true
         artifacts: "build/libs/MobArena-1.0-SNAPSHOT.jar"
-        name: ${{ steps.version.outputs.version }}
-        tag: ${{ steps.version.outputs.version }}
+        name: ${{ steps.version.outputs.VersionID }}
+        tag: ${{ steps.version.outputs.VersionID }}
         generateReleaseNotes: true
       env:
         GITHUB_TOKEN: ${{ github.token }}
