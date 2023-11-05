@@ -46,8 +46,11 @@ public class ArenaManagement {
         MobSpawnEntry creeper = new MobSpawnEntry(EntityType.CREEPER, 1, 5, 1, "arena");
         MobSpawnEntry towerSkeleton = new MobSpawnEntry(EntityType.SKELETON, 1, 8, 2, "tower");
         MobSpawnEntry arenaSkeleton = new MobSpawnEntry(EntityType.SKELETON, 1, 10, 5, "arena");
+        MobSpawnEntry blaze = new MobSpawnEntry(EntityType.BLAZE, 1, 15, 1, "arena");
+        MobSpawnEntry warden = new MobSpawnEntry(EntityType.WARDEN, 1, 50, 5, "arena");
+        MobSpawnEntry wither = new MobSpawnEntry(EntityType.WITHER, 1, 100, 1, "arena");
 
-        MobSpawnEntry[] mobSpawnEntries = { zombie, creeper, towerSkeleton, arenaSkeleton };
+        MobSpawnEntry[] mobSpawnEntries = { zombie, creeper, towerSkeleton, arenaSkeleton, blaze, warden, wither };
 
         // spawn points
 
@@ -78,7 +81,7 @@ public class ArenaManagement {
                 ),
                 new Location(
                         Bukkit.getServer().getWorld("mob_arena"),
-                        -4, -60, 4
+                        -4, -53, 4
                 ),
                 Bukkit.getServer().getWorld("mob_arena")
         );

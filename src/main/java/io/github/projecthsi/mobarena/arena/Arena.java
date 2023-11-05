@@ -2,7 +2,7 @@ package io.github.projecthsi.mobarena.arena;
 
 import io.github.projecthsi.mobarena.FillArea;
 import io.github.projecthsi.mobarena.MathExtensions;
-import io.github.projecthsi.mobarena.containers.EntityContainer;
+import io.github.projecthsi.mobarena.containers.Container;
 import io.github.projecthsi.mobarena.containers.PlayerContainer;
 import io.github.projecthsi.mobarena.plugin.MobArena;
 import io.papermc.paper.threadedregions.scheduler.ScheduledTask;
@@ -16,6 +16,7 @@ import net.kyori.adventure.title.Title;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
+import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Mob;
 import org.bukkit.entity.Player;
@@ -78,7 +79,7 @@ public class Arena {
 
         continueGame = true;
 
-        currentRound = 1;
+        currentRound = 0;
 
         maxPlayers = trackedPlayers.size();
 
@@ -162,13 +163,17 @@ public class Arena {
 
 
 
-        final String baseMiniMessage = "<yellow>Wave:</yellow> <wave>" + "<br>" +
-                "<green>Players:</green> <players>" + "<br>" +
+        final String baseMiniMessage = "<yellow>Wave:</yellow> <wave>" + " - " +
+                "<green>Players:</green> <players>" + " - " +
                 "<red>Mobs:</red> <mobs>";
 
         Component actionBarComponent = MiniMessage.miniMessage().deserialize(baseMiniMessage, wavePlaceholder, playersPlaceholder, mobsPlaceholder);
 
         return actionBarComponent;
+    }
+
+    private void gameOver() {
+        chatToAllPlayers(MiniMessage.miniMessage().deserialize("Hello, err, guys don't do what I did - Don't~ Never charge your DS at Freddy Fazbear's Pizza! <i>knocking</i> Oh, guys I messed up, guys don't do what I did, don't do what I did. Don't do the trick! Don't do the Mario trick guys! <i>knocking</i> <b>DON'T DO~!</b>"));
     }
 
     private void gameLoop(ScheduledTask scheduledTask) {
@@ -181,8 +186,15 @@ public class Arena {
             }, null, 0);
         }
 
-        if (mobs == 0) {
+        // we check for the size of trackedMobs as well.
+        // prevents soft locking if we kill entities fast enough.
+        if (mobs == 0 || trackedMobs.isEmpty()) {
             wave();
+        }
+
+        if (continueGame == false) {
+            gameOver();
+            scheduledTask.cancel();
         }
     }
 
@@ -196,8 +208,12 @@ public class Arena {
         playerInventory.clear();
 
         playerInventory.setItem(0, new ItemStack(Material.IRON_SWORD));
-        playerInventory.setItem(1, new ItemStack(Material.CROSSBOW));
-        playerInventory.setItem(0 /* Target Inventory Slot */ + (9 /* Columns/Row */ * (3 /* Target Inventory Row */ - 1)), new ItemStack(Material.ARROW));
+
+        ItemStack crossbow = new ItemStack(Material.BOW);
+        crossbow.addEnchantment(Enchantment.ARROW_INFINITE, 1);
+
+        playerInventory.setItem(1, crossbow);
+        playerInventory.setItem(1 /* Target Inventory Slot */ + (9 /* Columns/Row */ * (3 /* Target Inventory Row */ - 1)), new ItemStack(Material.ARROW));
         playerInventory.setHeldItemSlot(0);
 
         playerInventory.setHelmet(new ItemStack(Material.IRON_HELMET));
@@ -208,18 +224,49 @@ public class Arena {
         playerInventory.setItemInOffHand(new ItemStack(Material.SHIELD));
     }
 
+    private Component generateWaveTitle() {
+        final String baseWaveString = "<yellow>Wave: <wave></yellow>";
+
+        TagResolver wavePlaceholder = Formatter.number("wave", currentRound);
+
+        Component waveComponent = MiniMessage.miniMessage().deserialize(baseWaveString, wavePlaceholder);
+
+        return waveComponent;
+    }
+
+    private Component generateWaveSubtitle() {
+        final String baseWaveDataString = "<red>Mobs: <mobs></red>";
+
+        TagResolver mobsPlaceholder = Formatter.number("mobs", maxMobs);
+
+        Component waveDataComponent = MiniMessage.miniMessage().deserialize(baseWaveDataString, mobsPlaceholder);
+
+        return waveDataComponent;
+    }
+
     private void wave() {
+        currentRound++;
+
+        MobArena.getInstance().getLogger().info("--- WAVE: " + currentRound + " ---");
+
         spawnMobs(currentRound);
+
+        final String baseWaveString = "<yellow>Wave: <wave></yellow>";
+
+        TagResolver wavePlaceholder = Formatter.number("wave", currentRound);
+
+        Component waveComponent = MiniMessage.miniMessage().deserialize(baseWaveString);
 
         for (Player player : trackedPlayers) {
             player.getScheduler().execute(MobArena.getInstance(), () -> {
+                player.showTitle(Title.title(generateWaveTitle(), generateWaveSubtitle()));
+                player.sendMessage(generateWaveSubtitle());
+
                 player.setHealth(20);
 
                 setupKitForPlayer(player);
             }, null, 0);
         }
-
-        currentRound++;
     }
 
     private void spawnMobs(int wave) {
@@ -260,7 +307,7 @@ public class Arena {
                     // we're doing casting and adding to an array, not entity tasks.
                     trackedMobs.add((Mob) newEntity);
 
-                    EntityContainer.addTrackedMob((Mob) newEntity, this);
+                    Container.Containers.mobContainer.addTracked((Mob) newEntity, this);
                 });
             }
         }
@@ -318,18 +365,31 @@ public class Arena {
 
         player.setHealth(20);
         player.teleport(lobbySpawnLocation);
+
+        continueGame = false;
+    }
+
+    public void playerQuit(Player player) {
+        HashMap<Player, Arena> trackedPlayersHashmap = PlayerContainer.getTrackedPlayers();
+
+        trackedPlayersHashmap.remove(player);
+
+        PlayerContainer.setTrackedPlayers(trackedPlayersHashmap);
+
+        continueGame = !(trackedPlayers.size() <= 1);
     }
 
     public void entityDeath(Mob mob) {
         trackedMobs.remove(mob);
 
-        HashMap<Mob, Arena> trackedMobsHashmap = EntityContainer.getTrackedMobs();
+        HashMap<Mob, Arena> trackedMobsHashmap = Container.Containers.mobContainer.getTrackedMobs();
 
         trackedMobsHashmap.remove(mob);
 
-        EntityContainer.setTrackedMobs(trackedMobsHashmap);
+        Container.Containers.mobContainer.setTrackedMobs(trackedMobsHashmap);
 
-        mobs -= 1;
+        // fixes a bug where the game thinks there are more mobs/players then there actually are.
+        mobs = trackedMobs.size();
     }
     //</editor-fold>
 

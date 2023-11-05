@@ -6,6 +6,7 @@ import org.bukkit.entity.Mob;
 
 import java.util.HashMap;
 
+@Deprecated
 public class EntityContainer {
     private static HashMap<Mob, Arena> trackedMobs = new HashMap<>();
 

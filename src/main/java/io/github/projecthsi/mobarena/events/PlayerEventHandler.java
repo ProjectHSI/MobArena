@@ -5,6 +5,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PlayerDeathEvent;
+import org.bukkit.event.player.PlayerQuitEvent;
 
 import static io.github.projecthsi.mobarena.plugin.MobArena.getInstance;
 
@@ -26,5 +27,14 @@ public class PlayerEventHandler implements Listener
 
         // we don't want to kill the player, so we cancel it here.
         event.setCancelled(true);
+    }
+
+    @EventHandler
+    public void onPlayerDisconnect(PlayerQuitEvent event) {
+        if (!PlayerContainer.getTrackedPlayers().containsKey(event.getPlayer())) {
+            return;
+        }
+
+        PlayerContainer.getTrackedPlayers().get(event.getPlayer()).playerQuit(event.getPlayer());
     }
 }

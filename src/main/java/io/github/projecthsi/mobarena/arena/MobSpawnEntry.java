@@ -1,5 +1,6 @@
 package io.github.projecthsi.mobarena.arena;
 
+import io.github.projecthsi.mobarena.plugin.MobArena;
 import org.bukkit.entity.EntityType;
 
 public class MobSpawnEntry {
@@ -39,14 +40,28 @@ public class MobSpawnEntry {
     }
 
     public boolean shouldSpawn(int round) {
+        MobArena.getInstance().getLogger().info("ShouldSpawn: " + (round >= spawnRound));
         return round >= spawnRound;
     }
 
     public int getSpawnCount(int round) {
-        if (!shouldSpawn(round)) return 0;
+        MobArena.getInstance().getLogger().info("Calculations started for MobSpawnEntry.");
 
-        int roundForMob = round - spawnRound;
+        if (!shouldSpawn(round)) {
+            MobArena.getInstance().getLogger().info("Aborting. Should not spawn.");
+            return 0;
+        }
 
-        return roundForMob / modulo;
+        MobArena.getInstance().getLogger().info("We're OK to spawn.");
+
+        int roundForMob = round - (spawnRound - 1);
+
+        MobArena.getInstance().getLogger().info("roundForMob: " + roundForMob + ".");
+
+        int modulod = (int) Math.floor((double) roundForMob / modulo);
+
+        MobArena.getInstance().getLogger().info("Modulo'd: " + roundForMob + ".");
+
+        return modulod;
     }
 }

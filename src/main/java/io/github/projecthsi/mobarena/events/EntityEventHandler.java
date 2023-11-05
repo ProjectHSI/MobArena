@@ -1,5 +1,6 @@
 package io.github.projecthsi.mobarena.events;
 
+import io.github.projecthsi.mobarena.containers.Container;
 import io.github.projecthsi.mobarena.containers.EntityContainer;
 import io.github.projecthsi.mobarena.plugin.MobArena;
 import org.bukkit.entity.Entity;
@@ -23,13 +24,13 @@ public class EntityEventHandler implements Listener {
 
         getInstance().getLogger().info(String.format("Entity death; %s", entity.getName()));
 
-        if (!EntityContainer.containsTrackedMob(mob)) {
+        if (!Container.Containers.mobContainer.containsTracked(mob)) {
             return;
         }
 
         getInstance().getLogger().info(String.format("Tracked mob; %s", entity.getName()));
 
-        EntityContainer.getTrackedMobArena(mob).entityDeath(mob);
+        Container.Containers.mobContainer.getTracked(mob).entityDeath(mob);
     }
 
     @EventHandler
@@ -45,6 +46,16 @@ public class EntityEventHandler implements Listener {
     @EventHandler
     public void onArrowLandEvent(ProjectileHitEvent event) {
         event.getEntity().getScheduler().execute(MobArena.getInstance(), () -> {
+            getInstance().getLogger().info(String.format("ProjectileSource Entity Type; %s", event.getEntity().getShooter().getClass().getName()));
+
+            if (event.getEntity().getShooter() instanceof Entity) {
+                getInstance().getLogger().info(String.format("ProjectileSource Entity; %s", ((Entity) event.getEntity().getShooter()).getName()));
+
+                if (event.getEntity().getShooter() instanceof Mob) {
+                    getInstance().getLogger().info(String.format("ProjectileSource Mob in EntityContainer; %s", String.valueOf(Container.Containers.mobContainer.containsTracked((Mob) event.getEntity().getShooter()))));
+                }
+            }
+
             event.getEntity().remove();
         }, null, 0);
     }

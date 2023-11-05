@@ -79,18 +79,9 @@ public class PlayerManagement {
             CommandInteractions.displayError(sender, "You are not in an arena.");
         }
 
-        Arena arena = playersInContainer.get(player);
+        PlayerContainer.getTrackedPlayers().get(player).playerQuit(player);
 
-        ArrayList<Player> arenaPlayers = arena.getPlayers();
-        arenaPlayers.remove(player);
-
-        arena.setPlayers(arenaPlayers);
-
-        HashMap<Player, Arena> players = PlayerContainer.getTrackedPlayers();
-        players.remove(player);
-        PlayerContainer.setTrackedPlayers(players);
-
-        sender.sendMessage(MiniMessage.miniMessage().deserialize("You have left <bold>" + arena.getName() + "</bold>"));
+        sender.sendMessage(MiniMessage.miniMessage().deserialize("You have left <bold>" + PlayerContainer.getTrackedPlayers().get(player).getName() + "</bold>"));
 
         return true;
     }

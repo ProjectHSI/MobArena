@@ -5,6 +5,7 @@ import org.bukkit.entity.Player;
 
 import java.util.HashMap;
 
+@Deprecated
 public class PlayerContainer {
     private static HashMap<Player, Arena> trackedPlayers = new HashMap<>();
 

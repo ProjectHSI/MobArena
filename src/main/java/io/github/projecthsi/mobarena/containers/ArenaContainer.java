@@ -5,6 +5,7 @@ import io.github.projecthsi.mobarena.plugin.MobArena;
 
 import java.util.HashMap;
 
+@Deprecated
 public class ArenaContainer {
     private final HashMap<String, Arena> arenas = new HashMap<>();
 
