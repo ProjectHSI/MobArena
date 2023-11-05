@@ -32,7 +32,10 @@ jobs:
         arguments: build
 
     - name: Get Version
-      run: echo "::set-output name=version::$(git rev-parse --short "$GITHUB_SHA")"
+      run: |
+        echo "Multi-Step Execution Test
+        echo "::set-output name=version::$(git rev-parse --short "$GITHUB_SHA")"
+        echo "End"
       id: version
 
     - name: Create Release
