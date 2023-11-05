@@ -382,11 +382,11 @@ public class Arena {
     public void entityDeath(Mob mob) {
         trackedMobs.remove(mob);
 
-        HashMap<Mob, Arena> trackedMobsHashmap = Container.Containers.mobContainer.getTrackedMobs();
+        HashMap<Mob, Arena> trackedMobsHashmap = Container.Containers.mobContainer.getTracked();
 
         trackedMobsHashmap.remove(mob);
 
-        Container.Containers.mobContainer.setTrackedMobs(trackedMobsHashmap);
+        Container.Containers.mobContainer.setTracked(trackedMobsHashmap);
 
         // fixes a bug where the game thinks there are more mobs/players then there actually are.
         mobs = trackedMobs.size();
