@@ -10,7 +10,7 @@ echo "Calculated Version (Branch Name): '$branchName'."
 
 version=""
 
-if [[ $branchName == "main" ]]; then
+if [[ $branchName != "main" ]]; then
   echo "Not on Main branch."
   usingNonMainBranch=true
 fi
