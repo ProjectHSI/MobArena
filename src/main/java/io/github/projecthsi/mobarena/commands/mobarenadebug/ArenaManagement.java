@@ -25,7 +25,7 @@ public class ArenaManagement {
         }
 
         //try {
-            Container.Containers.arenaContainer.addTracked(args[1]).startGame();
+            Container.Containers.arenaContainer.getTracked(args[1]).startGame();
             return true;
         //} catch (Exception e) {
         //    sender.sendMessage("mad error; invalid arena");
