@@ -24,10 +24,10 @@ public record MobSpawnEntry(EntityType mob, int amount, int spawnRound, int modu
 
         MobArena.getInstance().getLogger().info("roundForMob: " + roundForMob + ".");
 
-        int modulo = (int) Math.floor((double) roundForMob / modulo);
+        int moduloNumber = (int) Math.floor((double) roundForMob / modulo);
 
-        MobArena.getInstance().getLogger().info("Modulo: " + roundForMob + ".");
+        MobArena.getInstance().getLogger().info("Modulo: " + moduloNumber + ".");
 
-        return modulo;
+        return moduloNumber;
     }
 }
