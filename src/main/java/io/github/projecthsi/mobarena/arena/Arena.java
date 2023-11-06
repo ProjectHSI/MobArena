@@ -45,10 +45,10 @@ public class Arena {
     //<editor-fold desc="Game Controllers">
     private Location getRandomPositionFromFillArea(FillArea fillArea) {
         return new Location(
-                fillArea.getWorld(),
-                MathExtensions.getRandomNumberWithinRange(fillArea.getPos1().x(), fillArea.getPos2().x()),
-                MathExtensions.getRandomNumberWithinRange(fillArea.getPos1().y(), fillArea.getPos2().y()),
-                MathExtensions.getRandomNumberWithinRange(fillArea.getPos1().z(), fillArea.getPos2().z())
+                fillArea.world(),
+                MathExtensions.getRandomNumberWithinRange(fillArea.pos1().x(), fillArea.pos2().x()),
+                MathExtensions.getRandomNumberWithinRange(fillArea.pos1().y(), fillArea.pos2().y()),
+                MathExtensions.getRandomNumberWithinRange(fillArea.pos1().z(), fillArea.pos2().z())
         );
     }
 
@@ -240,15 +240,7 @@ public class Arena {
     private void wave() {
         currentRound++;
 
-        MobArena.getInstance().getLogger().info("--- WAVE: " + currentRound + " ---");
-
         spawnMobs(currentRound);
-
-        final String baseWaveString = "<yellow>Wave: <wave></yellow>";
-
-        TagResolver wavePlaceholder = Formatter.number("wave", currentRound);
-
-        Component waveComponent = MiniMessage.miniMessage().deserialize(baseWaveString);
 
         for (Player player : trackedPlayers) {
             player.getScheduler().execute(MobArena.getInstance(), () -> {
@@ -276,20 +268,20 @@ public class Arena {
 
             mobs += spawnCount;
 
-            SpawnPoint spawnPoint = spawnPoints.get(mobSpawnEntry.getSpawnPoint());
-            World spawnWorld = spawnPoint.getFillArea().getWorld();
+            SpawnPoint spawnPoint = spawnPoints.get(mobSpawnEntry.spawnPoint());
+            World spawnWorld = spawnPoint.getFillArea().world();
 
             for (int i = 0; i < spawnCount; i++) {
                 Location spawnLocation = new Location(
                         spawnWorld,
-                        MathExtensions.getRandomNumberWithinRange(spawnPoint.getFillArea().getPos1().x(), spawnPoint.getFillArea().getPos2().x()),
-                        MathExtensions.getRandomNumberWithinRange(spawnPoint.getFillArea().getPos1().y(), spawnPoint.getFillArea().getPos2().y()),
-                        MathExtensions.getRandomNumberWithinRange(spawnPoint.getFillArea().getPos1().z(), spawnPoint.getFillArea().getPos2().z())
+                        MathExtensions.getRandomNumberWithinRange(spawnPoint.getFillArea().pos1().x(), spawnPoint.getFillArea().pos2().x()),
+                        MathExtensions.getRandomNumberWithinRange(spawnPoint.getFillArea().pos1().y(), spawnPoint.getFillArea().pos2().y()),
+                        MathExtensions.getRandomNumberWithinRange(spawnPoint.getFillArea().pos1().z(), spawnPoint.getFillArea().pos2().z())
                 );
 
                 // needed for Folia support.
                 MobArena.getInstance().getServer().getRegionScheduler().execute(MobArena.getInstance(), spawnLocation, () -> {
-                    Entity newEntity = spawnWorld.spawnEntity(getRandomPositionFromFillArea(spawnPoint.getFillArea()), mobSpawnEntry.getMob());
+                    Entity newEntity = spawnWorld.spawnEntity(getRandomPositionFromFillArea(spawnPoint.getFillArea()), mobSpawnEntry.mob());
 
                     // same here.
                     newEntity.getScheduler().execute(MobArena.getInstance(), () -> newEntity.teleport(spawnLocation), null, 0);
@@ -321,7 +313,7 @@ public class Arena {
             boolean mobSpawnEntryIsOk = false;
 
             for (String spawnPoint : spawnPoints.keySet()) {
-                if (Objects.equals(spawnPoint, mobSpawnEntry.getSpawnPoint())) {
+                if (Objects.equals(spawnPoint, mobSpawnEntry.spawnPoint())) {
                     mobSpawnEntryIsOk = true;
                     break;
                 }
