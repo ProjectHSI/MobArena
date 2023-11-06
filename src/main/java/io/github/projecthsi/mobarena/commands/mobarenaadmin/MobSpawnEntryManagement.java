@@ -2,6 +2,7 @@ package io.github.projecthsi.mobarena.commands.mobarenaadmin;
 
 import io.github.projecthsi.mobarena.arena.Arena;
 import io.github.projecthsi.mobarena.commands.CommandInteractions;
+import io.github.projecthsi.mobarena.containers.Container;
 import org.bukkit.command.CommandSender;
 import org.jetbrains.annotations.NotNull;
 
@@ -21,7 +22,7 @@ public class MobSpawnEntryManagement {
         Arena arenaInstance = null;
 
         try {
-            arenaInstance = Container.Containers.arenaContainer.getInstance().getArena(arenaName);
+            arenaInstance = Container.Containers.arenaContainer.getTracked(arenaName);
         } catch (Exception e) {
             CommandInteractions.displayError(sender, "That arena does not exist.");
 
