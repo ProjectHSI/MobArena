@@ -11,7 +11,7 @@ public class EntityContainer {
     private static HashMap<Mob, Arena> trackedMobs = new HashMap<>();
 
     /**
-     * @deprecated Usage of this method is not recommended due to thread safety reasons. Use the indirect methods.
+     * @deprecated ProjectHSI doesn't recommend usage of this method due to thread safety reasons. Use the indirect methods.
      */
     @Deprecated
     public static void setTrackedMobs(HashMap<Mob, Arena> newTrackedMobs) {
@@ -35,7 +35,7 @@ public class EntityContainer {
     }
 
     /**
-     * @deprecated Usage of this method is not recommended due to thread safety reasons. Use the indirect methods.
+     * @deprecated ProjectHSI doesn't recommend usage of this method due to thread safety reasons. Use the indirect methods.
      */
     @Deprecated
     public static HashMap<Mob, Arena> getTrackedMobs() {
