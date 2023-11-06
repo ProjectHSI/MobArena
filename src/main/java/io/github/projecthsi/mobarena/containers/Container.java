@@ -12,9 +12,9 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
 public class Container<I, V> {
     private HashMap<I, V> tracked = new HashMap<>();
 
-    private ReadWriteLock trackedLock = new ReentrantReadWriteLock();
-    private Lock readLock = trackedLock.readLock();
-    private Lock writeLock = trackedLock.writeLock();
+    private final ReadWriteLock trackedLock = new ReentrantReadWriteLock();
+    private final Lock readLock = trackedLock.readLock();
+    private final Lock writeLock = trackedLock.writeLock();
 
     /**
      * @deprecated Usage of this method is not recommended due to thread safety reasons. Use the indirect methods.
@@ -69,8 +69,8 @@ public class Container<I, V> {
     }
 
     public static class Containers {
-        public  static Container<String, Arena> arenaContainer = new Container<>();
-        public static Container<Mob, Arena> mobContainer = new Container<>();
-        public static Container<Player, Arena> playerContainer = new Container<>();
+        public static final Container<String, Arena> arenaContainer = new Container<>();
+        public static final Container<Mob, Arena> mobContainer = new Container<>();
+        public static final Container<Player, Arena> playerContainer = new Container<>();
     }
 }

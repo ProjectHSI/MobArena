@@ -14,6 +14,7 @@ import static io.github.projecthsi.mobarena.commands.mobarena.PlayerManagement.l
 
 public class MobArena extends Command {
     public MobArena() {
+        //noinspection SpellCheckingInspection
         super("mobarena",
                 "Mob Arena",
                 "mobarena",
@@ -35,6 +36,7 @@ public class MobArena extends Command {
 
         Player player = ( Player ) sender;
 
+        //noinspection ConstantValue
         if (player == null) {
             CommandInteractions.displayError(sender, "This command must be run as a player.");
 

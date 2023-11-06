@@ -3,7 +3,7 @@ package io.github.projecthsi.mobarena.commands.mobarenaadmin;
 import io.github.projecthsi.mobarena.commands.CommandInteractions;
 import io.github.projecthsi.mobarena.FillArea;
 import io.github.projecthsi.mobarena.arena.Arena;
-import io.github.projecthsi.mobarena.containers.ArenaContainer;
+import io.github.projecthsi.mobarena.containers.Container.Containers.arenaContainer;
 import io.github.projecthsi.mobarena.arena.SpawnPoint;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.Location;
@@ -39,10 +39,10 @@ public class SpawnPointManagement {
             return false;
         }
 
-        Arena arenaInstance = null;
+        Arena arenaInstance;
 
         try {
-            arenaInstance = ArenaContainer.getInstance().getArena(arenaName);
+            arenaInstance = Container.Containers.arenaContainer.getInstance().getArena(arenaName);
         } catch (Exception e) {
             CommandInteractions.displayError(sender, "That arena does not exist.");
 
@@ -52,7 +52,7 @@ public class SpawnPointManagement {
         if (arenaInstance.getSpawnPoints().containsKey(spawnPointName)) {
             CommandInteractions.displayError(sender, "That spawn point already exists.");
             return false;
-        };
+        }
 
         Location location1 = new Location(player.getWorld(), x1, y1, z1);
         Location location2 = new Location(player.getWorld(), x2, y2, z2);
@@ -77,10 +77,10 @@ public class SpawnPointManagement {
         String arenaName = args[1];
         String spawnPointName = args[2];
 
-        Arena arenaInstance = null;
+        Arena arenaInstance;
 
         try {
-            arenaInstance = ArenaContainer.getInstance().getArena(arenaName);
+            arenaInstance = Container.Containers.arenaContainer.getInstance().getArena(arenaName);
         } catch (Exception e) {
             CommandInteractions.displayError(sender, "That arena does not exist.");
 

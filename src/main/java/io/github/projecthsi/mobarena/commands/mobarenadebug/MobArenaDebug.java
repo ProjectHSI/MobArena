@@ -11,6 +11,7 @@ import java.util.Arrays;
 
 public class MobArenaDebug extends Command {
     public MobArenaDebug() {
+        //noinspection SpellCheckingInspection
         super("mobarendebug",
                 "Mob Arena Debug",
                 "mobarenadebug",
@@ -33,6 +34,7 @@ public class MobArenaDebug extends Command {
 
         Player player = ( Player ) sender;
 
+        //noinspection ConstantValue
         if (player == null) {
             CommandInteractions.displayError(sender, "This command must be run as a player.");
 

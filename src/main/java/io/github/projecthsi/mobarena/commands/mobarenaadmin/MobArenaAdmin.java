@@ -1,25 +1,22 @@
 package io.github.projecthsi.mobarena.commands.mobarenaadmin;
 
-import io.github.projecthsi.mobarena.commands.mobarenaadmin.SpawnPointManagement;
 import io.github.projecthsi.mobarena.commands.CommandInteractions;
 import net.kyori.adventure.text.minimessage.MiniMessage;
-import org.bukkit.Location;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
-import static io.github.projecthsi.mobarena.commands.mobarenaadmin.SpawnPointManagement.addSpawnPoint;
-import static io.github.projecthsi.mobarena.commands.mobarenaadmin.SpawnPointManagement.removeSpawnPoint;
 import static io.github.projecthsi.mobarena.commands.mobarenaadmin.ArenaManagement.createArena;
 import static io.github.projecthsi.mobarena.commands.mobarenaadmin.ArenaManagement.removeArena;
+import static io.github.projecthsi.mobarena.commands.mobarenaadmin.SpawnPointManagement.addSpawnPoint;
+import static io.github.projecthsi.mobarena.commands.mobarenaadmin.SpawnPointManagement.removeSpawnPoint;
 
 public class MobArenaAdmin extends Command {
     public MobArenaAdmin() {
+        //noinspection SpellCheckingInspection
         super("mobarenaadmin",
                 "Mob Arena Admin",
                 "mobarenaadmin",
@@ -42,6 +39,7 @@ public class MobArenaAdmin extends Command {
 
         Player player = ( Player ) sender;
 
+        //noinspection ConstantValue
         if (player == null) {
             CommandInteractions.displayError(sender, "This command must be run as a player.");
 

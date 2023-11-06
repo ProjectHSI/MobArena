@@ -2,7 +2,6 @@ package io.github.projecthsi.mobarena.commands;
 
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.command.Command;
-import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.jetbrains.annotations.NotNull;
 
@@ -10,6 +9,7 @@ import java.util.ArrayList;
 
 public class MiniMessageTest extends Command {
     public MiniMessageTest() {
+        //noinspection SpellCheckingInspection
         super("minimessagetest", "Mini Message Test", "minimessagetest", new ArrayList<>());
     }
 

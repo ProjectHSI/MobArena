@@ -5,7 +5,7 @@ import io.github.projecthsi.mobarena.plugin.MobArena;
 import java.util.Random;
 
 public class MathExtensions {
-    private static Random random = new Random();
+    private static final Random random = new Random();
 
     public static double getRandomNumberWithinRange(double min, double max) {
         MobArena.getInstance().getLogger().info("min: " + min);
@@ -18,8 +18,8 @@ public class MathExtensions {
             min = oldMax;
             max = oldMin;
 
-            MobArena.getInstance().getLogger().info("nmin: " + min);
-            MobArena.getInstance().getLogger().info("nmax: " + max);
+            MobArena.getInstance().getLogger().info("new min: " + min);
+            MobArena.getInstance().getLogger().info("new max: " + max);
         }
 
         double number = min + (max - min) * random.nextDouble();

@@ -16,7 +16,7 @@ public class ArenaContainer {
     }
 
     public boolean arenaExists(String arenaName) {
-        return arenas.containsKey(arenaName);
+        return !arenas.containsKey(arenaName);
     }
 
     public void addArena(String arenaName, Arena arenaInstance) throws Exception {

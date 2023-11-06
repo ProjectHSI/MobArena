@@ -2,7 +2,7 @@ package io.github.projecthsi.mobarena.commands.mobarena;
 
 import io.github.projecthsi.mobarena.arena.Arena;
 import io.github.projecthsi.mobarena.commands.CommandInteractions;
-import io.github.projecthsi.mobarena.containers.ArenaContainer;
+import io.github.projecthsi.mobarena.containers.Container;
 import io.github.projecthsi.mobarena.containers.PlayerContainer;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.command.CommandSender;
@@ -23,34 +23,33 @@ public class PlayerManagement {
 
         Player player = ( Player ) sender;
 
+        //noinspection ConstantValue
         if (player == null) {
             CommandInteractions.displayError(sender, "This command must be run as a player.");
 
             return false;
         }
 
-        if (PlayerContainer.getTrackedPlayers().containsKey(player)) {
+        if (Container.Containers.playerContainer.containsTracked(player)) {
             CommandInteractions.displayError(sender, "You are already in an arena.");
 
             return false;
         }
 
-        if (!ArenaContainer.getInstance().arenaExists(args[1])) {
+        if (Container.Containers.arenaContainer.containsTracked(args[1])) {
             CommandInteractions.displayError(sender, "That arena does not exist.");
 
             return false;
         }
 
-        Arena arena = ArenaContainer.getInstance().getArena(args[1]);
+        Arena arena = Container.Containers.arenaContainer.getTracked(args[1]);
         ArrayList<Player> arenaPlayers = arena.getPlayers();
 
         arenaPlayers.add(player);
 
         arena.setPlayers(arenaPlayers);
 
-        HashMap<Player, Arena> players = PlayerContainer.getTrackedPlayers();
-        players.put(player, arena);
-        PlayerContainer.setTrackedPlayers(players);
+        Container.Containers.playerContainer.addTracked(player, arena);
 
         sender.sendMessage(MiniMessage.miniMessage().deserialize("You have joined <bold>" + arena.getName() + "</bold>"));
 
@@ -58,7 +57,7 @@ public class PlayerManagement {
     }
 
     static boolean leavePlayer(@NotNull CommandSender sender, @NotNull String commandLabel, @NotNull String[] args) {
-        if (args.length != 0 + 1) {
+        if (args.length != 1) {
             CommandInteractions.displayError(sender, "This subcommand must be run with 0 arguments.");
             CommandInteractions.displayUsage(sender, commandLabel + " leaveArena");
 
@@ -67,6 +66,7 @@ public class PlayerManagement {
 
         Player player = ( Player ) sender;
 
+        //noinspection ConstantValue
         if (player == null) {
             CommandInteractions.displayError(sender, "This command must be run as a player.");
 
@@ -75,13 +75,13 @@ public class PlayerManagement {
 
         HashMap<Player, Arena> playersInContainer = PlayerContainer.getTrackedPlayers();
 
-        if (!playersInContainer.containsKey(player)) {
+        if (!Container.Containers.playerContainer.containsTracked(player)) {
             CommandInteractions.displayError(sender, "You are not in an arena.");
         }
 
-        PlayerContainer.getTrackedPlayers().get(player).playerQuit(player);
+        Container.Containers.playerContainer.getTracked(player).playerQuit(player);
 
-        sender.sendMessage(MiniMessage.miniMessage().deserialize("You have left <bold>" + PlayerContainer.getTrackedPlayers().get(player).getName() + "</bold>"));
+        sender.sendMessage(MiniMessage.miniMessage().deserialize("You have left <bold>" + Container.Containers.playerContainer.getTracked(player).getName() + "</bold>"));
 
         return true;
     }

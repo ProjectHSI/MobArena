@@ -19,15 +19,11 @@ public class EntityContainer {
     }
 
     public static void addTrackedMob(Mob mob, Arena arena) {
-        MobArena.getInstance().getServer().getGlobalRegionScheduler().execute(MobArena.getInstance(), () -> {
-            trackedMobs.put(mob, arena);
-        });
+        MobArena.getInstance().getServer().getGlobalRegionScheduler().execute(MobArena.getInstance(), () -> trackedMobs.put(mob, arena));
     }
 
     public static void removeTrackedMob(Mob mob) {
-        MobArena.getInstance().getServer().getGlobalRegionScheduler().execute(MobArena.getInstance(), () -> {
-            trackedMobs.remove(mob);
-        });
+        MobArena.getInstance().getServer().getGlobalRegionScheduler().execute(MobArena.getInstance(), () -> trackedMobs.remove(mob));
     }
 
     public static Arena getTrackedMobArena(Mob mob) {

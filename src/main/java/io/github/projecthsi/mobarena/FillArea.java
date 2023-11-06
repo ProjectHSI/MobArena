@@ -4,9 +4,9 @@ import org.bukkit.Location;
 import org.bukkit.World;
 
 public class FillArea {
-    private Location pos1;
-    private Location pos2;
-    private World world;
+    private final Location pos1;
+    private final Location pos2;
+    private final World world;
 
     public FillArea(Location pos1, Location pos2, World world) {
         this.pos1 = pos1;

@@ -3,7 +3,6 @@ package io.github.projecthsi.mobarena.arena;
 import io.github.projecthsi.mobarena.FillArea;
 import io.github.projecthsi.mobarena.MathExtensions;
 import io.github.projecthsi.mobarena.containers.Container;
-import io.github.projecthsi.mobarena.containers.PlayerContainer;
 import io.github.projecthsi.mobarena.plugin.MobArena;
 import io.papermc.paper.threadedregions.scheduler.ScheduledTask;
 import net.kyori.adventure.text.Component;
@@ -32,7 +31,7 @@ public class Arena {
     private MobSpawnEntry[] mobSpawnEntries;
     private HashMap<String, SpawnPoint> spawnPoints;
     private ArrayList<Player> trackedPlayers = new ArrayList<>();
-    private ArrayList<Mob> trackedMobs = new ArrayList<>();
+    private final ArrayList<Mob> trackedMobs = new ArrayList<>();
     private Location lobbySpawnLocation;
 
     int maxPlayers;
@@ -167,9 +166,7 @@ public class Arena {
                 "<green>Players:</green> <players>" + " - " +
                 "<red>Mobs:</red> <mobs>";
 
-        Component actionBarComponent = MiniMessage.miniMessage().deserialize(baseMiniMessage, wavePlaceholder, playersPlaceholder, mobsPlaceholder);
-
-        return actionBarComponent;
+        return MiniMessage.miniMessage().deserialize(baseMiniMessage, wavePlaceholder, playersPlaceholder, mobsPlaceholder);
     }
 
     private void gameOver() {
@@ -192,7 +189,7 @@ public class Arena {
             wave();
         }
 
-        if (continueGame == false) {
+        if (!continueGame) {
             gameOver();
             scheduledTask.cancel();
         }
@@ -229,9 +226,7 @@ public class Arena {
 
         TagResolver wavePlaceholder = Formatter.number("wave", currentRound);
 
-        Component waveComponent = MiniMessage.miniMessage().deserialize(baseWaveString, wavePlaceholder);
-
-        return waveComponent;
+        return MiniMessage.miniMessage().deserialize(baseWaveString, wavePlaceholder);
     }
 
     private Component generateWaveSubtitle() {
@@ -239,9 +234,7 @@ public class Arena {
 
         TagResolver mobsPlaceholder = Formatter.number("mobs", maxMobs);
 
-        Component waveDataComponent = MiniMessage.miniMessage().deserialize(baseWaveDataString, mobsPlaceholder);
-
-        return waveDataComponent;
+        return MiniMessage.miniMessage().deserialize(baseWaveDataString, mobsPlaceholder);
     }
 
     private void wave() {
@@ -275,9 +268,9 @@ public class Arena {
         for (MobSpawnEntry mobSpawnEntry : mobSpawnEntries) {
             MobArena.getInstance().getLogger().info("spawn entry yippee");
 
-            if (!mobSpawnEntry.shouldSpawn(wave)) continue;
+            if (mobSpawnEntry.shouldSpawn(wave)) continue;
             MobArena.getInstance().getLogger().info("we gain invincibility for 1/35th of a second");
-            MobArena.getInstance().getLogger().info("Woohoo!");
+            MobArena.getInstance().getLogger().info("Woo-hoo!");
 
             int spawnCount = mobSpawnEntry.getSpawnCount(wave);
 
@@ -299,9 +292,7 @@ public class Arena {
                     Entity newEntity = spawnWorld.spawnEntity(getRandomPositionFromFillArea(spawnPoint.getFillArea()), mobSpawnEntry.getMob());
 
                     // same here.
-                    newEntity.getScheduler().execute(MobArena.getInstance(), () -> {
-                        newEntity.teleport(spawnLocation);
-                    }, null, 0);
+                    newEntity.getScheduler().execute(MobArena.getInstance(), () -> newEntity.teleport(spawnLocation), null, 0);
 
                     // we don't need to run these in the entity scheduler, as we're not performing tasks on an entity.
                     // we're doing casting and adding to an array, not entity tasks.
@@ -357,24 +348,16 @@ public class Arena {
     }
 
     public void playerDeath(Player player) {
-        HashMap<Player, Arena> trackedPlayersHashmap = PlayerContainer.getTrackedPlayers();
-
-        trackedPlayersHashmap.remove(player);
-
-        PlayerContainer.setTrackedPlayers(trackedPlayersHashmap);
+        Container.Containers.playerContainer.removeTracked(player);
 
         player.setHealth(20);
         player.teleport(lobbySpawnLocation);
 
-        continueGame = false;
+        continueGame = !(trackedPlayers.size() <= 1);
     }
 
     public void playerQuit(Player player) {
-        HashMap<Player, Arena> trackedPlayersHashmap = PlayerContainer.getTrackedPlayers();
-
-        trackedPlayersHashmap.remove(player);
-
-        PlayerContainer.setTrackedPlayers(trackedPlayersHashmap);
+        Container.Containers.playerContainer.removeTracked(player);
 
         continueGame = !(trackedPlayers.size() <= 1);
     }
@@ -382,11 +365,7 @@ public class Arena {
     public void entityDeath(Mob mob) {
         trackedMobs.remove(mob);
 
-        HashMap<Mob, Arena> trackedMobsHashmap = Container.Containers.mobContainer.getTracked();
-
-        trackedMobsHashmap.remove(mob);
-
-        Container.Containers.mobContainer.setTracked(trackedMobsHashmap);
+        Container.Containers.mobContainer.removeTracked(mob);
 
         // fixes a bug where the game thinks there are more mobs/players then there actually are.
         mobs = trackedMobs.size();

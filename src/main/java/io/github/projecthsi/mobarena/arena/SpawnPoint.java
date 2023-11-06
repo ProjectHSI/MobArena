@@ -1,13 +1,12 @@
 package io.github.projecthsi.mobarena.arena;
 
 import io.github.projecthsi.mobarena.FillArea;
-import io.papermc.paper.math.Position;
 import org.bukkit.Location;
 import org.bukkit.World;
 
 public class SpawnPoint {
-    private String name;
-    private FillArea fillArea;
+    private final String name;
+    private final FillArea fillArea;
 
     public SpawnPoint(String name, FillArea fillArea) {
         this.name = name;

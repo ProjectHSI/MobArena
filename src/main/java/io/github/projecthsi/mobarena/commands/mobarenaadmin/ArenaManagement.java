@@ -1,8 +1,8 @@
 package io.github.projecthsi.mobarena.commands.mobarenaadmin;
 
 import io.github.projecthsi.mobarena.arena.Arena;
-import io.github.projecthsi.mobarena.containers.ArenaContainer;
 import io.github.projecthsi.mobarena.commands.CommandInteractions;
+import io.github.projecthsi.mobarena.containers.Container;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.command.CommandSender;
 import org.jetbrains.annotations.NotNull;
@@ -19,7 +19,7 @@ public class ArenaManagement {
         String arenaName = args[1];
 
         try {
-            ArenaContainer.getInstance().addArena(arenaName, new Arena());
+            Container.Containers.arenaContainer.addTracked(arenaName, new Arena());
         } catch (Exception e) {
             CommandInteractions.displayError(sender, "That arena already exists.");
             return false;
@@ -41,7 +41,7 @@ public class ArenaManagement {
         String arenaName = args[1];
 
         try {
-            ArenaContainer.getInstance().removeArena(arenaName);
+            Container.Containers.arenaContainer.removeTracked(arenaName);
         } catch (Exception e) {
             CommandInteractions.displayError(sender, "That arena does not exist.");
 

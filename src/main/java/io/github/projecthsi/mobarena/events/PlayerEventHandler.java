@@ -1,6 +1,6 @@
 package io.github.projecthsi.mobarena.events;
 
-import io.github.projecthsi.mobarena.containers.PlayerContainer;
+import io.github.projecthsi.mobarena.containers.Container;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
@@ -19,11 +19,11 @@ public class PlayerEventHandler implements Listener
 
         getInstance().getLogger().info(String.format("Player death; %s", event.getPlayer().getName()));
 
-        if (!PlayerContainer.getTrackedPlayers().containsKey(event.getPlayer())) {
+        if (!Container.Containers.playerContainer.containsTracked(event.getPlayer())) {
             return;
         }
 
-        PlayerContainer.getTrackedPlayers().get(event.getPlayer()).playerDeath(event.getPlayer());
+        Container.Containers.playerContainer.getTracked(event.getPlayer()).playerDeath(event.getPlayer());
 
         // we don't want to kill the player, so we cancel it here.
         event.setCancelled(true);
@@ -31,10 +31,10 @@ public class PlayerEventHandler implements Listener
 
     @EventHandler
     public void onPlayerDisconnect(PlayerQuitEvent event) {
-        if (!PlayerContainer.getTrackedPlayers().containsKey(event.getPlayer())) {
+        if (!Container.Containers.playerContainer.containsTracked(event.getPlayer())) {
             return;
         }
 
-        PlayerContainer.getTrackedPlayers().get(event.getPlayer()).playerQuit(event.getPlayer());
+        Container.Containers.playerContainer.getTracked(event.getPlayer()).playerQuit(event.getPlayer());
     }
 }

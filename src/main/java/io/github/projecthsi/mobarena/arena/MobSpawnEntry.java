@@ -4,12 +4,12 @@ import io.github.projecthsi.mobarena.plugin.MobArena;
 import org.bukkit.entity.EntityType;
 
 public class MobSpawnEntry {
-    private EntityType mob;
+    private final EntityType mob;
 
-    private int amount;
-    private int spawnRound;
-    private int modulo;
-    private String spawnPoint;
+    private final int amount;
+    private final int spawnRound;
+    private final int modulo;
+    private final String spawnPoint;
 
     public MobSpawnEntry(EntityType mob, int amount, int spawnRound, int modulo, String spawnPoint) {
         this.mob = mob;
@@ -41,13 +41,13 @@ public class MobSpawnEntry {
 
     public boolean shouldSpawn(int round) {
         MobArena.getInstance().getLogger().info("ShouldSpawn: " + (round >= spawnRound));
-        return round >= spawnRound;
+        return round < spawnRound;
     }
 
     public int getSpawnCount(int round) {
         MobArena.getInstance().getLogger().info("Calculations started for MobSpawnEntry.");
 
-        if (!shouldSpawn(round)) {
+        if (shouldSpawn(round)) {
             MobArena.getInstance().getLogger().info("Aborting. Should not spawn.");
             return 0;
         }
@@ -58,10 +58,10 @@ public class MobSpawnEntry {
 
         MobArena.getInstance().getLogger().info("roundForMob: " + roundForMob + ".");
 
-        int modulod = (int) Math.floor((double) roundForMob / modulo);
+        int modulo = (int) Math.floor((double) roundForMob / modulo);
 
-        MobArena.getInstance().getLogger().info("Modulo'd: " + roundForMob + ".");
+        MobArena.getInstance().getLogger().info("Modulo: " + roundForMob + ".");
 
-        return modulod;
+        return modulo;
     }
 }
