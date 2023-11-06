@@ -3,41 +3,7 @@ package io.github.projecthsi.mobarena.arena;
 import io.github.projecthsi.mobarena.plugin.MobArena;
 import org.bukkit.entity.EntityType;
 
-public class MobSpawnEntry {
-    private final EntityType mob;
-
-    private final int amount;
-    private final int spawnRound;
-    private final int modulo;
-    private final String spawnPoint;
-
-    public MobSpawnEntry(EntityType mob, int amount, int spawnRound, int modulo, String spawnPoint) {
-        this.mob = mob;
-        this.amount = amount;
-        this.spawnRound = spawnRound;
-        this.modulo = modulo;
-        this.spawnPoint = spawnPoint;
-    }
-
-    public EntityType getMob() {
-        return mob;
-    }
-
-    public int getAmount() {
-        return amount;
-    }
-
-    public int getSpawnRound() {
-        return spawnRound;
-    }
-
-    public int getModulo() {
-        return modulo;
-    }
-
-    public String getSpawnPoint() {
-        return spawnPoint;
-    }
+public record MobSpawnEntry(EntityType mob, int amount, int spawnRound, int modulo, String spawnPoint) {
 
     public boolean shouldSpawn(int round) {
         MobArena.getInstance().getLogger().info("ShouldSpawn: " + (round >= spawnRound));
