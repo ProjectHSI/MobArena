@@ -136,12 +136,12 @@ public class Arena {
         TagResolver maxPlayersNumberPlaceholder = Formatter.number("max_players", maxPlayers);
         TagResolver playerColoursPlaceholder = Placeholder.styling("player_colour", playersTextColor);
 
-        Component playersComponentPlaceholder = MiniMessage.miniMessage().deserialize(basePlayersPlaceholder,
+        Component playerComponentPlaceholder = MiniMessage.miniMessage().deserialize(basePlayersPlaceholder,
                 playersNumberPlaceholder,
                 maxPlayersNumberPlaceholder,
                 playerColoursPlaceholder);
 
-        TagResolver playersPlaceholder = Placeholder.component("players", playersComponentPlaceholder);
+        TagResolver playerPlaceholder = Placeholder.component("players", playerComponentPlaceholder);
 
 
 
@@ -166,7 +166,7 @@ public class Arena {
                 "<green>Players:</green> <players>" + " - " +
                 "<red>Mobs:</red> <mobs>";
 
-        return MiniMessage.miniMessage().deserialize(baseMiniMessage, wavePlaceholder, playersPlaceholder, mobsPlaceholder);
+        return MiniMessage.miniMessage().deserialize(baseMiniMessage, wavePlaceholder, playerPlaceholder, mobsPlaceholder);
     }
 
     private void gameOver() {
