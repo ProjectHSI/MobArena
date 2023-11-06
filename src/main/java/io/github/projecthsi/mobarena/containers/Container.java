@@ -17,7 +17,7 @@ public class Container<I, V> {
     private final Lock writeLock = trackedLock.writeLock();
 
     /**
-     * @deprecated Usage of this method is not recommended due to thread safety reasons. Use the indirect methods.
+     * @deprecated ProjectHSI doesn't recommend usage of this method due to thread safety reasons. Use the indirect methods.
      */
     @Deprecated
     public void setTracked(HashMap<I, V> newTrackedMobs) {
@@ -61,7 +61,7 @@ public class Container<I, V> {
     }
 
     /**
-     * @deprecated Usage of this method is not recommended due to thread safety reasons. Use the indirect methods.
+     * @deprecated ProjectHSI doesn't recommend usage of this method due to thread safety reasons. Use the indirect methods.
      */
     @Deprecated
     public HashMap<I, V> getTracked() {
