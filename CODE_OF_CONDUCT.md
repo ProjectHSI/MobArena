@@ -123,7 +123,7 @@ This Code of Conduct is adapted from the [Contributor Covenant][homepage],
 version 2.0, available at
 https://www.contributor-covenant.org/version/2/0/code_of_conduct.html.
 
-[Mozilla's code of conduct enforcement ladder](https://github.com/mozilla/diversity) inspired the Community Impact Guidelines.
+[Mozilla’s code of conduct enforcement ladder](https://github.com/mozilla/diversity) inspired the Community Impact Guidelines.
 
 [homepage]: https://www.contributor-covenant.org
 
