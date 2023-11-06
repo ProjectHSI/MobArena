@@ -13,9 +13,10 @@ public class MathExtensions {
 
         if (min < max) {
             MobArena.getInstance().getLogger().info("inverting numbers");
+
+            // code may be confusing, IntelliJ recommended to inline the old oldMax variable.
             double oldMin = min;
-            double oldMax = max;
-            min = oldMax;
+            min = max;
             max = oldMin;
 
             MobArena.getInstance().getLogger().info("new min: " + min);
