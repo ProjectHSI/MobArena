@@ -31,7 +31,7 @@ Examples of unacceptable behavior include:
   advances of any kind
 * Trolling, insulting or derogatory comments, and personal or political attacks
 * Public or private harassment
-* Publishing others' private information, such as a physical or email
+* Publishing others’ private information, such as a physical or email
   address, without their explicit permission
 * Other conducts which could reasonably be considered inappropriate in a
   professional setting
@@ -44,8 +44,8 @@ response to any behavior that they deem inappropriate, threatening, offensive,
 or harmful.
 
 Community leaders have the right and responsibility to remove, edit, or reject
-comments, commits, code, wiki edits, issues, and other contributions that are
-not aligned to this Code of Conduct, and will communicate reasons for moderation
+comments, commits, code, wiki edits, issues, and other contributions that don’t
+align to this Code of Conduct, and will communicate reasons for moderation
 decisions when appropriate.
 
 ## Scope
@@ -58,13 +58,14 @@ representative at an online or offline event.
 
 ## Enforcement
 
-Instances of abusive, harassing, or otherwise unacceptable behavior may be
-reported to the community leaders responsible for enforcement at
-Discord, under the username "projecthsi."
-All complaints will be reviewed and investigated promptly and fairly.
+Anyone may report instances of abusive, harassing,
+or otherwise unacceptable behavior to the community
+leaders responsible for enforcement at
+<CONTACT METHOD PENDING>
+I will review and investigate all complaints promptly and fairly.
 
-All community leaders are obligated to respect the privacy and security of the
-reporter of any incident.
+This code of conduct obligates all community leaders to
+respect the privacy and security of the reporter of any incident.
 
 ## Enforcement Guidelines
 
@@ -78,7 +79,8 @@ unprofessional or unwelcome in the community.
 
 **Consequence**: A private, written warning from community leaders, providing
 clarity around the nature of the violation and an explanation of why the
-behavior was inappropriate. A public apology may be requested.
+behavior was inappropriate.
+Community leaders may request a public apology.
 
 ### 2. Warning
 
@@ -98,15 +100,16 @@ permanent ban.
 sustained inappropriate behavior.
 
 **Consequence**: A temporary ban from any sort of interaction or public
-communication with the community for a specified period of time. No public or
+communication with the community for a specified period of time.
+This code of conduct allows no public or
 private interaction with the people involved, including unsolicited interaction
-with those enforcing the Code of Conduct, is allowed during this period.
+with those enforcing the Code of Conduct, during this period.
 Violating these terms may lead to a permanent ban.
 
 ### 4. Permanent Ban
 
 **Community Impact**: Demonstrating a pattern of violation of community
-standards, including sustained inappropriate behavior,  harassment of an
+standards, including sustained inappropriate behavior, harassment of an
 individual, or aggression toward or disparagement of classes of individuals.
 
 **Consequence**: A permanent ban from any sort of public interaction within
@@ -114,12 +117,13 @@ the community.
 
 ## Attribution
 
+Projecthsi has modified this Code of Conduct to fix many *Grazie Pro* issues.
+
 This Code of Conduct is adapted from the [Contributor Covenant][homepage],
 version 2.0, available at
 https://www.contributor-covenant.org/version/2/0/code_of_conduct.html.
 
-Community Impact Guidelines were inspired by [Mozilla's code of conduct
-enforcement ladder](https://github.com/mozilla/diversity).
+[Mozilla's code of conduct enforcement ladder](https://github.com/mozilla/diversity) inspired the Community Impact Guidelines.
 
 [homepage]: https://www.contributor-covenant.org
 
