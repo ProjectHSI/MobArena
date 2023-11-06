@@ -20,11 +20,9 @@ public class MobArenaAdmin extends Command {
         super("mobarenaadmin",
                 "Mob Arena Admin",
                 "mobarenaadmin",
-                Arrays.asList(new String[] {
-                        "mobarenaa",
+                Arrays.asList("mobarenaa",
                         "maadmin",
-                        "maa"
-                }));
+                        "maa"));
     }
 
     private void showHelp(@NotNull CommandSender sender, @NotNull String commandLabel) {
@@ -33,10 +31,6 @@ public class MobArenaAdmin extends Command {
 
     @Override
     public boolean execute(@NotNull CommandSender sender, @NotNull String commandLabel, @NotNull String[] args) {
-        // sender.sendMessage(MiniMessage.miniMessage().deserialize("<b>Hello!</b> " +
-        //         "<i><gradient:#ff0000:#00ff00>This is a test</gradient> <gradient:#00ff00:#0000ff>of the MiniMessage format.</gradient></i> " +
-        //         "<rainbow>Rainbow text is included <obf>here</obf>.</rainbow>"));
-
         Player player = ( Player ) sender;
 
         //noinspection ConstantValue
