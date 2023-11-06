@@ -2,7 +2,6 @@ package io.github.projecthsi.mobarena.commands.mobarenaadmin;
 
 import io.github.projecthsi.mobarena.arena.Arena;
 import io.github.projecthsi.mobarena.commands.CommandInteractions;
-import io.github.projecthsi.mobarena.containers.ArenaContainer;
 import org.bukkit.command.CommandSender;
 import org.jetbrains.annotations.NotNull;
 
