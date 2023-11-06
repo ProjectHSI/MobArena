@@ -116,7 +116,6 @@ public class ArenaManagement {
         MobSpawnEntry warden = new MobSpawnEntry(EntityType.WARDEN, 1, 50, 5, "arena");
         MobSpawnEntry wither = new MobSpawnEntry(EntityType.WITHER, 1, 100, 1, "arena");
 
-        MobSpawnEntry[] mobSpawnEntries = { zombie, creeper, towerSkeleton, arenaSkeleton, blaze, warden, wither };
-        return mobSpawnEntries;
+        return new MobSpawnEntry[]{ zombie, creeper, towerSkeleton, arenaSkeleton, blaze, warden, wither };
     }
 }
