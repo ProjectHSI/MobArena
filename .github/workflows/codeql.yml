@@ -51,7 +51,7 @@ jobs:
       with:
         languages: ${{ matrix.language }}
 
-    - name: Autobuild
+    - name: AutoBuild
       uses: github/codeql-action/autobuild@v2
 
     # - run: |
