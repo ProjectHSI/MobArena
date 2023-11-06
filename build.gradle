@@ -28,12 +28,14 @@ java {
     sourceCompatibility = javaVersion
     targetCompatibility = javaVersion
     if (JavaVersion.current() < javaVersion) {
+        //noinspection GrUnresolvedAccess
         toolchain.languageVersion = JavaLanguageVersion.of(targetJavaVersion)
     }
 }
 
 tasks.withType(JavaCompile).configureEach {
     if (targetJavaVersion >= 10 || JavaVersion.current().isJava10Compatible()) {
+        //noinspection GroovyAssignabilityCheck
         options.release = targetJavaVersion
     }
 }
