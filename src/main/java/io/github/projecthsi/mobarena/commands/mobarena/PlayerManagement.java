@@ -3,14 +3,12 @@ package io.github.projecthsi.mobarena.commands.mobarena;
 import io.github.projecthsi.mobarena.arena.Arena;
 import io.github.projecthsi.mobarena.commands.CommandInteractions;
 import io.github.projecthsi.mobarena.containers.Container;
-import io.github.projecthsi.mobarena.containers.PlayerContainer;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class PlayerManagement {
     static boolean joinPlayer(@NotNull CommandSender sender, @NotNull String commandLabel, @NotNull String[] args) {
@@ -72,8 +70,6 @@ public class PlayerManagement {
 
             return false;
         }
-
-        HashMap<Player, Arena> playersInContainer = PlayerContainer.getTrackedPlayers();
 
         if (!Container.Containers.playerContainer.containsTracked(player)) {
             CommandInteractions.displayError(sender, "You are not in an arena.");
