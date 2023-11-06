@@ -14,7 +14,6 @@ import static io.github.projecthsi.mobarena.commands.mobarena.PlayerManagement.l
 
 public class MobArena extends Command {
     public MobArena() {
-        //noinspection SpellCheckingInspection
         super("mobarena",
                 "Mob Arena",
                 "mobarena",
