@@ -145,7 +145,8 @@ public class FullLog {
 
                 /* we do the analysis adding here, since if the declaredField is protected by the class,
                 it'll have already failed as the above statement. */
-                if (!declaredField.getType().isPrimitive()) {
+                // we do testing to check if the object is strictly the same, so we don't end up with infinite recursion.
+                if (!declaredField.getType().isPrimitive() && declaredField.get(object) == object) {
                     objectsToBeAnalyzed.add(declaredField.get(object));
                 }
             } catch (Exception e) {
