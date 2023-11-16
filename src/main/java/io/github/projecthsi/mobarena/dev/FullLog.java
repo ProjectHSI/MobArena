@@ -3,7 +3,6 @@ package io.github.projecthsi.mobarena.dev;
 import io.github.projecthsi.mobarena.plugin.MobArena;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
-import net.kyori.adventure.text.format.StyleBuilderApplicable;
 import net.kyori.adventure.text.format.TextColor;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
@@ -35,7 +34,7 @@ public class FullLog {
     private static TagResolver generateBannerIndenture(int indentureCount) {
         String indenture = "-".repeat(indentureCount * 2);
 
-        TagResolver indentureColor = Placeholder.styling("indenture-color", (StyleBuilderApplicable) FullLog.indentureColor);
+        TagResolver indentureColor = Placeholder.styling("indenture-color", FullLog.indentureColor);
         TagResolver indenturePlaceholder = Placeholder.unparsed("indenture", indenture);
 
         return Placeholder.component("indenture", MiniMessage.miniMessage().deserialize("<indenture-color><indenture><indenture-color>", indentureColor, indenturePlaceholder));
@@ -44,7 +43,7 @@ public class FullLog {
     private static TagResolver generateBannerPackage(Object object) {
         String packageName = object.getClass().getPackageName() + ".";
 
-        TagResolver packageColor = Placeholder.styling("package-color", (StyleBuilderApplicable) genericPackageTextColor);
+        TagResolver packageColor = Placeholder.styling("package-color", genericPackageTextColor);
         TagResolver packagePlaceholder = Placeholder.unparsed("package", packageName);
 
         return Placeholder.component("package", MiniMessage.miniMessage().deserialize("<package-color><package><package-color>", packageColor, packagePlaceholder));
@@ -53,7 +52,7 @@ public class FullLog {
     private static TagResolver generateBannerClass(Object object) {
         String className = object.getClass().getName();
 
-        TagResolver classColor = Placeholder.styling("class-color", (StyleBuilderApplicable) genericClassTextColor);
+        TagResolver classColor = Placeholder.styling("class-color", genericClassTextColor);
         TagResolver classPlaceholder = Placeholder.unparsed("class", className);
 
         return Placeholder.component("class", MiniMessage.miniMessage().deserialize("<class-color><class><class-color>", classColor, classPlaceholder));
@@ -74,21 +73,21 @@ public class FullLog {
     private static TagResolver generateKVIndenture(int indentureCount) {
         String indenture = "-".repeat(indentureCount * 2);
 
-        TagResolver indentureColor = Placeholder.styling("indenture-color", (StyleBuilderApplicable) FullLog.indentureColor);
+        TagResolver indentureColor = Placeholder.styling("indenture-color", FullLog.indentureColor);
         TagResolver indenturePlaceholder = Placeholder.unparsed("indenture", indenture);
 
         return Placeholder.component("indenture", MiniMessage.miniMessage().deserialize("<indenture-color><indenture><indenture-color>", indentureColor, indenturePlaceholder));
     }
 
     private static TagResolver generateKVKey(String key) {
-        TagResolver keyColor = Placeholder.styling("key-color", (StyleBuilderApplicable) keyTextColor);
+        TagResolver keyColor = Placeholder.styling("key-color", keyTextColor);
         TagResolver keyPlaceholder = Placeholder.unparsed("key", key);
 
         return Placeholder.component("key", MiniMessage.miniMessage().deserialize("<indenture-color><indenture><indenture-color>", keyColor, keyPlaceholder));
     }
 
     private static TagResolver generateKVValue(String value) {
-        TagResolver valueColor = Placeholder.styling("value-color", (StyleBuilderApplicable) valueTextColor);
+        TagResolver valueColor = Placeholder.styling("value-color", valueTextColor);
         TagResolver valuePlaceholder = Placeholder.unparsed("value", value);
 
         return Placeholder.component("value", MiniMessage.miniMessage().deserialize("<indenture-color><indenture><indenture-color>", valueColor, valuePlaceholder));
@@ -97,7 +96,7 @@ public class FullLog {
     private static TagResolver generateKVPackage(Object object) {
         String packageName = object.getClass().getPackageName() + ".";
 
-        TagResolver packageColor = Placeholder.styling("package-color", (StyleBuilderApplicable) packageTextColor);
+        TagResolver packageColor = Placeholder.styling("package-color", packageTextColor);
         TagResolver packagePlaceholder = Placeholder.unparsed("package", packageName);
 
         return Placeholder.component("package", MiniMessage.miniMessage().deserialize("<package-color><package><package-color>", packageColor, packagePlaceholder));
@@ -106,7 +105,7 @@ public class FullLog {
     private static TagResolver generateKVClass(Object object) {
         String className = object.getClass().getName();
 
-        TagResolver classColor = Placeholder.styling("class-color", (StyleBuilderApplicable) classTextColor);
+        TagResolver classColor = Placeholder.styling("class-color", classTextColor);
         TagResolver classPlaceholder = Placeholder.unparsed("class", className);
 
         return Placeholder.component("class", MiniMessage.miniMessage().deserialize("<class-color><class><class-color>", classColor, classPlaceholder));
