@@ -146,7 +146,7 @@ public class FullLog {
                 /* we do the analysis adding here, since if the declaredField is protected by the class,
                 it'll have already failed as the above statement. */
                 // we do testing to check if the object is strictly the same, so we don't end up with infinite recursion.
-                if (!declaredField.getType().isPrimitive() && declaredField.get(object) == object) {
+                if (!declaredField.getType().isPrimitive() && !(declaredField.get(object) == object)) {
                     objectsToBeAnalyzed.add(declaredField.get(object));
                 }
             } catch (Exception e) {
@@ -166,7 +166,7 @@ public class FullLog {
 
                 /* we do the analysis adding here, since if the declaredMethod is protected by the class,
                 it'll have already failed as the above statement. */
-                if (!declaredMethod.getReturnType().isPrimitive()) {
+                if (!declaredMethod.getReturnType().isPrimitive() && !(declaredMethod.get(object) == object)) {
                     objectsToBeAnalyzed.add(declaredMethod.invoke(object));
                 }
             } catch (Exception e) {
