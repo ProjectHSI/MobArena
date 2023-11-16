@@ -166,7 +166,7 @@ public class FullLog {
 
                 /* we do the analysis adding here, since if the declaredMethod is protected by the class,
                 it'll have already failed as the above statement. */
-                if (!declaredMethod.getReturnType().isPrimitive() && !(declaredMethod.get(object) == object)) {
+                if (!declaredMethod.getReturnType().isPrimitive() && !(declaredMethod.invoke(object) == object)) {
                     objectsToBeAnalyzed.add(declaredMethod.invoke(object));
                 }
             } catch (Exception e) {
