@@ -9,12 +9,10 @@ import net.kyori.adventure.text.minimessage.MiniMessage;
 import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
 import net.kyori.adventure.text.minimessage.tag.resolver.TagResolver;
 import net.kyori.adventure.text.serializer.ansi.ANSIComponentSerializer;
-import org.jetbrains.annotations.NotNull;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
-import java.util.Objects;
 import java.util.logging.Logger;
 
 /**
@@ -76,7 +74,7 @@ public class FullLog {
     private static TagResolver generateKVIndenture(int indentureCount) {
         String indenture = "-".repeat(indentureCount * 2);
 
-        TagResolver indentureColor = Placeholder.styling("indenture-color", (StyleBuilderApplicable) indentureColor);
+        TagResolver indentureColor = Placeholder.styling("indenture-color", (StyleBuilderApplicable) FullLog.indentureColor);
         TagResolver indenturePlaceholder = Placeholder.unparsed("indenture", indenture);
 
         return Placeholder.component("indenture", MiniMessage.miniMessage().deserialize("<indenture-color><indenture><indenture-color>", indentureColor, indenturePlaceholder));
