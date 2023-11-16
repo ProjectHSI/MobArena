@@ -24,7 +24,7 @@ public class MobArenaLoader implements PluginLoader {
         MavenRepository mavenCentral = new MavenRepository("Maven Central", "central", "default", "https://repo1.maven.org/maven2/", new ArrayList<>());
 
         // Protobuf
-        final String protobufVersion = "3.25.0";
+        final String protobufVersion = "3.25.1";
 
         // protobuf-java
         Dependency protobufJavaDependency = new Dependency("Protobuf Java", "com.google.protobuf", "protobuf-java", protobufVersion);
