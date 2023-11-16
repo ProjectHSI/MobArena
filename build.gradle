@@ -20,8 +20,7 @@ repositories {
 
 dependencies {
     compileOnly "io.papermc.paper:paper-api:1.20.2-R0.1-SNAPSHOT"
-    compileOnly "com.google.protobuf:protobuf-java:3.25.0"
-    compileOnly "com.google.protobuf:protobuf-java-util:3.25.0"
+    compileOnly "com.google.protobuf:protobuf-java:3.25.1"
     compileOnly "net.kyori:adventure-text-serializer-ansi:4.14.0"
 
 }
