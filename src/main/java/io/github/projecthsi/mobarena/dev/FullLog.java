@@ -89,14 +89,20 @@ public class FullLog {
         TagResolver keyColor = Placeholder.styling("key-color", keyTextColor);
         TagResolver keyPlaceholder = Placeholder.unparsed("key", key);
 
-        return Placeholder.component("key", MiniMessage.miniMessage().deserialize("<indenture-color><indenture><indenture-color>", keyColor, keyPlaceholder));
+        return Placeholder.component("key", MiniMessage.miniMessage().deserialize("<key-color><key><key-color>", keyColor, keyPlaceholder));
     }
 
     private static TagResolver generateKVValue(String value) {
         TagResolver valueColor = Placeholder.styling("value-color", valueTextColor);
         TagResolver valuePlaceholder = Placeholder.unparsed("value", value);
 
-        return Placeholder.component("value", MiniMessage.miniMessage().deserialize("<indenture-color><indenture><indenture-color>", valueColor, valuePlaceholder));
+        return Placeholder.component("value", MiniMessage.miniMessage().deserialize("<value-color><value><value-color>", valueColor, valuePlaceholder));
+    }
+
+    private static TagResolver generateKVSelector() {
+        TagResolver selectorColor = Placeholder.styling("selector-color", keyTextColor);
+
+        return Placeholder.component("selector", MiniMessage.miniMessage().deserialize("<selector-color>:<selector-color>", selectorColor));
     }
 
     private static TagResolver generateKVPackage(Object object) {
@@ -118,14 +124,15 @@ public class FullLog {
     }
 
     private static Component generateKV(String key, Object value, int recursion) {
-        final String bannerPlaceHolder = "<indenture> <key> (<package><class>): <value>";
+        final String bannerPlaceHolder = "<indenture> <key> (<package><class>)<selector> <value>";
 
         return MiniMessage.miniMessage().deserialize(bannerPlaceHolder,
                 generateKVIndenture(recursion),
                 generateKVKey(key),
                 generateKVValue(String.valueOf(value)),
                 generateKVPackage(value),
-                generateKVClass(value));
+                generateKVClass(value),
+                generateKVSelector());
     }
 
     public static void doFullLog(Object object, int maxRecursion) {
