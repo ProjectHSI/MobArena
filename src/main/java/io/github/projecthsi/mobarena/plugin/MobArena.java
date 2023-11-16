@@ -23,7 +23,7 @@ public final class MobArena extends JavaPlugin {
         getServer().getCommandMap().register("MobArenaDebug", ":", new MobArenaDebug());
         EventSystem.registerEvents();
 
-        io.github.projecthsi.mobarena.dev.FullLog.doFullLog(this, 6);
+        //io.github.projecthsi.mobarena.dev.FullLog.doFullLog(this, 6 + 1);
     }
 
     @Override

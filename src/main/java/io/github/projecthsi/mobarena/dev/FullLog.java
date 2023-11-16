@@ -77,7 +77,7 @@ public class FullLog {
 
 
     private static TagResolver generateKVIndenture(int indentureCount) {
-        String indenture = "-".repeat(indentureCount * 2);
+        String indenture = " ".repeat(indentureCount * 2);
 
         TagResolver indentureColor = Placeholder.styling("indenture-color", FullLog.indentureColor);
         TagResolver indenturePlaceholder = Placeholder.unparsed("indenture", indenture);
@@ -139,10 +139,12 @@ public class FullLog {
         doFullLog(object, maxRecursion, 0);
     }
 
-    private static void doFullLog(Object object, int maxRecursion, int currentRecursion) {
+    private static ArrayList<String> doFullLog(Object object, int maxRecursion, int currentRecursion) {
         currentRecursion++;
 
-        if (maxRecursion == currentRecursion) return;
+        ArrayList<String> logOutput;
+
+        if (maxRecursion == currentRecursion) return null;
 
         Logger logger = MobArena.getInstance().getLogger();
         ANSIComponentSerializer ansiComponentSerializer = ANSIComponentSerializer.ansi();
@@ -173,6 +175,8 @@ public class FullLog {
                 arguments.). */
                 if (!declaredMethod.getName().startsWith("get")) continue;
                 if (!(declaredMethod.getParameterCount() == 0)) continue;
+                // prevents infinite recursion.
+                if (declaredMethod.getName().equals("getClass")) continue;
 
                 logger.severe(ansiComponentSerializer.serialize(generateKV(declaredMethod.getName(), declaredMethod.invoke(object), currentRecursion)));
 
@@ -191,5 +195,7 @@ public class FullLog {
         }
 
         logger.severe(ansiComponentSerializer.serialize(generateBanner(object, currentRecursion)));
+
+        return null;
     }
 }
