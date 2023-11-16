@@ -2,7 +2,6 @@ package io.github.projecthsi.mobarena.config;
 
 import com.google.protobuf.InvalidProtocolBufferException;
 import com.google.protobuf.util.JsonFormat;
-import io.github.projecthsi.mobarena.containers.Container;
 import io.github.projecthsi.mobarena.protobuf.Config;
 import org.jetbrains.annotations.NotNull;
 
@@ -56,9 +55,9 @@ class ConfigWriter {
         }
     }
 
-    private static Config getProtobufConfig() {
+    private static /*Config*/ void getProtobufConfig() {
         Config.Builder configBuilder = Config.newBuilder();
 
-        configBuilder.putAllArenas();
+        //configBuilder.putAllArenas();
     }
 }

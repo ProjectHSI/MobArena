@@ -215,7 +215,7 @@ class ConfigGenerator {
                 arenasHashMap.put(arenaKey, generateArena(arenaValue));
             }
 
-            configRecord = new EncapsulatedConfigurationObjects.Config(arenasHashMap);
+            return new EncapsulatedConfigurationObjects.Config(arenasHashMap);
         }
     }
 }
