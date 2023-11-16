@@ -5,6 +5,7 @@ import io.github.projecthsi.mobarena.MathExtensions;
 import io.github.projecthsi.mobarena.containers.Container;
 import io.github.projecthsi.mobarena.plugin.MobArena;
 import io.papermc.paper.threadedregions.scheduler.ScheduledTask;
+import net.kyori.adventure.bossbar.BossBar;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
 import net.kyori.adventure.text.minimessage.MiniMessage;
@@ -15,12 +16,15 @@ import net.kyori.adventure.title.Title;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
+import org.bukkit.attribute.Attribute;
 import org.bukkit.enchantments.Enchantment;
+import org.bukkit.entity.Boss;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Mob;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
+import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -39,6 +43,12 @@ public class Arena {
 
     int maxMobs;
     int mobs;
+
+    long maxMobsHealth;
+    long maxPlayersHealth;
+
+    private BossBar mobsBossBar = BossBar.bossBar(MiniMessage.miniMessage().deserialize("<red>Mobs</red>"), 0, BossBar.Color.RED, BossBar.Overlay.PROGRESS);
+    private BossBar playersBossBar = BossBar.bossBar(MiniMessage.miniMessage().deserialize("<yellow>Players</yellow>"), 0, BossBar.Color.YELLOW, BossBar.Overlay.PROGRESS);
 
     private boolean gameInProgress = false;
 
@@ -173,30 +183,117 @@ public class Arena {
         chatToAllPlayers(MiniMessage.miniMessage().deserialize("Hello, err, guys don't do what I did - Don't~ Never charge your DS at Freddy Fazbear's Pizza! <i>knocking</i> Oh, guys I messed up, guys don't do what I did, don't do what I did. Don't do the trick! Don't do the Mario trick guys! <i>knocking</i> <b>DON'T DO~!</b>"));
     }
 
+    // prevents a soft-lock due to "ghost mobs"
+    private void fullMobCheck() {
+        mobs = trackedMobs.size();
+
+        if (mobs == 0) return;
+
+        for (int mobIndex = 0; mobIndex < trackedMobs.size(); mobIndex++) {
+            Mob mob = trackedMobs.get(mobIndex);
+
+            if (mob.isDead()) {
+                trackedMobs.remove(mobIndex);
+                mobs--;
+                //chatToAllPlayers(MiniMessage.miniMessage().deserialize("<yellow>Soft-lock averted. Additional information has been provided in the console.</yellow>"));
+
+                /*
+                // makes it slightly easier to use.
+                Logger logger = MobArena.getInstance().getLogger();
+
+                logger.warning("Soft-lock averted for arena \"" + this.name + "\".");
+                logger.warning("Report this at the GitHub repository ProjectHSI/MobArena, along with the below information.");
+                logger.warning("");
+                logger.warning("--- MobArena Soft-Lock Details ---");
+                logger.warning("- Name: " + this.name);
+                logger.warning("- Mob Type: " + mob.getType().name());
+                logger.warning("- Location:");
+                logger.warning("\t- World: " + mob.getLocation().getWorld().getName());
+                logger.warning("\t- X: " + mob.getLocation().getX());
+                logger.warning("\t- Y: " + mob.getLocation().getY());
+                logger.warning("\t- Z: " + mob.getLocation().getZ());
+                logger.warning("\t- Yaw: " + mob.getLocation().getYaw());
+                logger.warning("Time Stamp (This Check): " + Clock.systemDefaultZone());
+                logger.warning("--- MobArena Soft-Lock Details ---");
+                */
+            }
+        }
+    }
+
+    private int tick = 0;
+
     private void gameLoop(ScheduledTask scheduledTask) {
         actionBarToAllPlayers(generateActionBarText());
+
+        float playerHealth = 0;
 
         for (Player player : trackedPlayers) {
             player.getScheduler().execute(MobArena.getInstance(), () -> {
                 player.setFoodLevel(20);
-                player.setSaturation(20);
+                player.setSaturation(0);
+
+                if (!(player.getHealth() >= Objects.requireNonNull(player.getAttribute(Attribute.GENERIC_MAX_HEALTH)).getValue()) && (tick % 20 == 0)) {
+                    player.setHealth(player.getHealth() + 1);
+                }
             }, null, 0);
+
+            playerHealth += (float) player.getHealth();
         }
+
+        playerHealth = playerHealth / maxPlayersHealth;
+
+        float mobHealth = 0;
+
+        for (Mob mob : trackedMobs) {
+            mobHealth += (float) mob.getHealth();
+        }
+
+        mobHealth = mobHealth / maxMobsHealth;
+
+        if (Float.isInfinite(playerHealth) || Float.isNaN(playerHealth)) playerHealth = 0;
+        if (Float.isInfinite(mobHealth) || Float.isNaN(mobHealth)) mobHealth = 0;
+
+        playersBossBar.progress(playerHealth);
+        mobsBossBar.progress(mobHealth);
 
         // we check for the size of trackedMobs as well.
         // prevents soft locking if we kill entities fast enough.
         if (mobs == 0 || trackedMobs.isEmpty()) {
             wave();
+        } else if (tick % 20 == 0) {
+            fullMobCheck();
         }
 
         if (!continueGame) {
             gameOver();
             scheduledTask.cancel();
         }
+
+        tick++;
     }
 
     private void gameManager() {
+        tick = 0;
+
         MobArena.getInstance().getServer().getGlobalRegionScheduler().runAtFixedRate(MobArena.getInstance(), this::gameLoop, 1, 1);
+    }
+
+    private ItemStack getItemStack(Material material) {
+        return getItemStack(material, false);
+    }
+
+    private ItemStack getItemStack(Material material, boolean applyEnchantment) {
+        ItemStack itemStack = new ItemStack(material, 1);
+
+        if (applyEnchantment) itemStack.addEnchantment(Enchantment.ARROW_INFINITE, 1);
+
+        ItemMeta itemMeta = itemStack.getItemMeta();
+
+        itemMeta.setUnbreakable(true);
+
+        itemStack.setItemMeta(itemMeta);
+
+        return itemStack;
     }
 
     private void setupKitForPlayer(Player player) {
@@ -204,21 +301,18 @@ public class Arena {
 
         playerInventory.clear();
 
-        playerInventory.setItem(0, new ItemStack(Material.IRON_SWORD));
+        playerInventory.setItem(0, getItemStack(Material.IRON_SWORD));
 
-        ItemStack crossbow = new ItemStack(Material.BOW);
-        crossbow.addEnchantment(Enchantment.ARROW_INFINITE, 1);
-
-        playerInventory.setItem(1, crossbow);
+        playerInventory.setItem(1, getItemStack(Material.BOW, true));
         playerInventory.setItem(1 /* Target Inventory Slot */ + (9 /* Columns/Row */ * (3 /* Target Inventory Row */ - 1)), new ItemStack(Material.ARROW));
         playerInventory.setHeldItemSlot(0);
 
-        playerInventory.setHelmet(new ItemStack(Material.IRON_HELMET));
-        playerInventory.setChestplate(new ItemStack(Material.IRON_CHESTPLATE));
-        playerInventory.setLeggings(new ItemStack(Material.IRON_LEGGINGS));
-        playerInventory.setBoots(new ItemStack(Material.IRON_BOOTS));
+        playerInventory.setHelmet(getItemStack(Material.IRON_HELMET));
+        playerInventory.setChestplate(getItemStack(Material.IRON_CHESTPLATE));
+        playerInventory.setLeggings(getItemStack(Material.IRON_LEGGINGS));
+        playerInventory.setBoots(getItemStack(Material.IRON_BOOTS));
 
-        playerInventory.setItemInOffHand(new ItemStack(Material.SHIELD));
+        playerInventory.setItemInOffHand(getItemStack(Material.SHIELD));
     }
 
     private Component generateWaveTitle() {
@@ -241,6 +335,8 @@ public class Arena {
         currentRound++;
 
         spawnMobs(currentRound);
+
+        maxPlayersHealth = 20L * trackedPlayers.size();
 
         for (Player player : trackedPlayers) {
             player.getScheduler().execute(MobArena.getInstance(), () -> {
@@ -266,7 +362,9 @@ public class Arena {
 
             int spawnCount = mobSpawnEntry.getSpawnCount(wave);
 
-            mobs += spawnCount;
+            if (mobSpawnEntry.countTowardsLimit()) {
+                mobs += spawnCount;
+            }
 
             SpawnPoint spawnPoint = spawnPoints.get(mobSpawnEntry.spawnPoint());
             World spawnWorld = spawnPoint.getFillArea().world();
@@ -284,16 +382,38 @@ public class Arena {
                     Entity newEntity = spawnWorld.spawnEntity(getRandomPositionFromFillArea(spawnPoint.getFillArea()), mobSpawnEntry.mob());
 
                     // same here.
-                    newEntity.getScheduler().execute(MobArena.getInstance(), () -> newEntity.teleport(spawnLocation), null, 0);
+                    newEntity.getScheduler().execute(MobArena.getInstance(), () -> {
+                        newEntity.teleport(spawnLocation);
+
+                        if (newEntity instanceof Mob) {
+                            if (mobSpawnEntry.countTowardsLimit()) {
+                                maxMobsHealth += (long) Objects.requireNonNull(((Mob) newEntity).getAttribute(Attribute.GENERIC_MAX_HEALTH)).getDefaultValue();
+                            }
+                        }
+
+                        if (newEntity instanceof Boss) {
+                            ((Boss) newEntity).getBossBar().setVisible(false);
+                        }
+                    }, null, 0);
 
                     // we don't need to run these in the entity scheduler, as we're not performing tasks on an entity.
                     // we're doing casting and adding to an array, not entity tasks.
-                    trackedMobs.add((Mob) newEntity);
+                    if (mobSpawnEntry.countTowardsLimit()) {
+                        trackedMobs.add((Mob) newEntity);
 
-                    Container.Containers.mobContainer.addTracked((Mob) newEntity, this);
+                        Container.Containers.mobContainer.addTracked((Mob) newEntity, this);
+                    }
                 });
             }
         }
+
+        long mobHealth = 0;
+
+        for (Mob mob : trackedMobs) {
+            mobHealth += (long) mob.getHealth();
+        }
+
+        maxMobsHealth = mobHealth;
 
         maxMobs = mobs;
     }
@@ -301,6 +421,9 @@ public class Arena {
     private void teleportPlayers() {
         for (Player trackedPlayer : trackedPlayers) {
             trackedPlayer.teleport(getRandomPositionFromFillArea(spawnPoints.get("arena").getFillArea()));
+
+            playersBossBar.addViewer(trackedPlayer);
+            mobsBossBar.addViewer(trackedPlayer);
             // I think this is done in joinArena().
             // PlayerContainer.getTrackedPlayers().put(trackedPlayer);
         }
@@ -408,5 +531,9 @@ public class Arena {
     public void setLobbySpawnLocation(Location lobbySpawnLocation) {
         this.lobbySpawnLocation = lobbySpawnLocation;
     }
+
+    public ArrayList<Mob> getTrackedMobs() { return trackedMobs; }
+
+    public void stop() { continueGame = false; }
     //</editor-fold>
 }

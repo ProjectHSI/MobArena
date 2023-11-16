@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/MobArena.main.iml" filepath="$PROJECT_DIR$/.idea/modules/MobArena.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/MobArena.test.iml" filepath="$PROJECT_DIR$/.idea/modules/MobArena.test.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/io.github.projecthsi.MobArena.main.iml" filepath="$PROJECT_DIR$/.idea/modules/io.github.projecthsi.MobArena.main.iml" />
     </modules>
   </component>

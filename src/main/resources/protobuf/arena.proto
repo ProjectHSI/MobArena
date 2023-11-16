@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+package mob_arena;
+
+option java_multiple_files = true;
+option java_package = "io.github.projecthsi.mobarena.protobuf";
+option java_outer_classname = "ArenaOuter";
+
+import "mobarena.proto";
+
+message Arena {
+  string name = 1;
+  repeated SpawnPoint spawnPoints = 2;
+  repeated MobSpawnEntry mobSpawnEntries = 3;
+}

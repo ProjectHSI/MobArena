@@ -1,10 +1,12 @@
 package io.github.projecthsi.mobarena.events;
 
 import io.github.projecthsi.mobarena.containers.Container;
+import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PlayerDeathEvent;
+import org.bukkit.event.player.PlayerCommandPreprocessEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 
 import static io.github.projecthsi.mobarena.plugin.MobArena.getInstance;
@@ -36,5 +38,17 @@ public class PlayerEventHandler implements Listener
         }
 
         Container.Containers.playerContainer.getTracked(event.getPlayer()).playerQuit(event.getPlayer());
+    }
+
+    // Nrgh... Cheating is bad, don't do it.
+    @EventHandler
+    public void onPlayerCommand(PlayerCommandPreprocessEvent event) {
+        if (!Container.Containers.playerContainer.containsTracked(event.getPlayer()) || !Container.Containers.playerContainer.getTracked(event.getPlayer()).isGameInProgress()) {
+            return;
+        }
+
+        event.getPlayer().sendMessage(MiniMessage.miniMessage().deserialize("<red>That command has been disabled.</red>"));
+
+        event.setCancelled(true);
     }
 }

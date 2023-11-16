@@ -20,6 +20,10 @@ repositories {
 
 dependencies {
     compileOnly "io.papermc.paper:paper-api:1.20.2-R0.1-SNAPSHOT"
+    compileOnly "com.google.protobuf:protobuf-java:3.25.0"
+    compileOnly "com.google.protobuf:protobuf-java-util:3.25.0"
+    implementation "net.kyori:adventure-text-serializer-ansi:4.14.0"
+
 }
 
 def targetJavaVersion = 17
@@ -46,6 +50,15 @@ processResources {
     filteringCharset 'UTF-8'
     filesMatching('paper-plugin.yml') {
         expand props
+    }
+}
+
+sourceSets {
+    main {
+        java {
+            srcDirs 'src/main/java'
+            srcDirs 'src/main/generated'
+        }
     }
 }
 

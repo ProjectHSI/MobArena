@@ -1,0 +1,148 @@
+// This file contains some definitions for Minecraft / Bukkit.
+// It contains things like Location.
+syntax = "proto3";
+
+package mob_arena;
+
+option java_multiple_files = true;
+option java_package = "io.github.projecthsi.mobarena.protobuf";
+option java_outer_classname = "MCOuter";
+
+enum EntityType {
+  ALLAY = 0;
+  AREA_EFFECT_CLOUD = 1;
+  ARMOR_STAND = 2;
+  ARROW = 3;
+  AXOLOTL = 4;
+  BAT = 5;
+  BEE = 6;
+  BLAZE = 7;
+  BLOCK_DISPLAY = 8;
+  BOAT = 9;
+  CAMEL = 10;
+  CAT = 11;
+  CAVE_SPIDER = 12;
+  CHEST_BOAT = 13;
+  CHICKEN = 14;
+  COD = 15;
+  COW = 16;
+  CREEPER = 17;
+  DOLPHIN = 18;
+  DONKEY = 19;
+  DRAGON_FIREBALL = 20;
+  DROPPED_ITEM = 21;
+  DROWNED = 22;
+  EGG = 23;
+  ELDER_GUARDIAN = 24;
+  ENDER_CRYSTAL = 25;
+  ENDER_DRAGON = 26;
+  ENDER_PEARL = 27;
+  ENDER_SIGNAL = 28;
+  ENDERMAN = 29;
+  ENDERMITE = 30;
+  EVOKER = 31;
+  EVOKER_FANGS = 32;
+  EXPERIENCE_ORB = 33;
+  FALLING_BLOCK = 34;
+  FIREBALL = 35;
+  FIREWORK = 36;
+  FISHING_HOOK = 37;
+  FOX = 38;
+  FROG = 39;
+  GHAST = 40;
+  GIANT = 41;
+  GLOW_ITEM_FRAME = 42;
+  GLOW_SQUID = 43;
+  GOAT = 44;
+  GUARDIAN = 45;
+  HOGLIN = 46;
+  HORSE = 47;
+  HUSK = 48;
+  ILLUSIONER = 49;
+  INTERACTION = 50;
+  IRON_GOLEM = 51;
+  ITEM_FRAME = 52;
+  LEASH_HITCH = 53;
+  LIGHTNING = 54;
+  LLAMA = 55;
+  LLAMA_SPUT = 56;
+  MAGMA_CUBE = 57;
+  MARKER = 58;
+  MINECART = 59;
+  MINECART_CHEST = 60;
+  MINECRAFT_COMMAND = 61;
+  MINECRAFT_FURNACE = 62;
+  MINECART_HOPPER = 63;
+  MINECART_MOB_SPAWNER = 64;
+  MINECART_TNT = 65;
+  MULE = 66;
+  MUSHROOM_COW = 67;
+  OCELOT = 68;
+  PAINTING = 69;
+  PANDA = 70;
+  PARROT = 71;
+  PHANTOM = 72;
+  PIG = 73;
+  PIGLIN = 74;
+  PIGLIN_BRUTE = 75;
+  PILLAGER = 76;
+  PLAYER = 77;
+  POLAR_BEAR = 78;
+  PRIMED_TNT = 79;
+  PUFFERFISH = 80;
+  RABBIT = 81;
+  RAVAGER = 82;
+  SALMON = 83;
+  SHEEP = 84;
+  SHULKER = 85;
+  SHULKER_BULLET = 86;
+  SLIVERFISH = 87;
+  SKELETON = 88;
+  SKELETON_HORSE = 89;
+  SLIME = 90;
+  SMALL_FIREBALL = 91;
+  SNIFFER = 92;
+  SNOWBALL = 93;
+  SNOWMAN = 94;
+  SPECTRAL_ARROW = 95;
+  SPIDER = 96;
+  SPLASH_POTION = 97;
+  SQUID = 98;
+  STRAY = 99;
+  STRIDER = 100;
+  TADPOLE = 101;
+  TEXT_DISPLAY = 102;
+  THROWN_EXP_BOTTLE = 103;
+  TRADER_LLAMA = 104;
+  TRIDENT = 105;
+  TROPICAL_FISH = 106;
+  TURTLE = 107;
+  UNKNOWN = 108;
+  VEX = 109;
+  VILLAGER = 110;
+  VINDICATOR = 111;
+  WANDERING_TRADER = 112;
+  WARDEN = 113;
+  WITCH = 114;
+  WITHER = 115;
+  WITHER_SKELETON = 116;
+  WITHER_SKULL = 117;
+  WOLF = 118;
+  ZOGLIN = 119;
+  ZOMBIE = 120;
+  ZOMBIE_HORSE = 121;
+  ZOMBIE_VILLAGER = 122;
+  ZOMBIFIED_PIGLIN = 123;
+}
+
+message World {
+  string name = 1;
+  string uuid = 2;
+}
+
+message Location {
+  World world = 1;
+  double x = 2;
+  double y = 3;
+  double z = 4;
+}

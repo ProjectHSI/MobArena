@@ -51,6 +51,9 @@ public class MobArenaDebug extends Command {
             case "createTestArena":
                 return ArenaManagement.createDebugArena(sender, commandLabel, args);
 
+            case "probeArena":
+                return ArenaManagement.probeMobs(sender, commandLabel, args);
+
             default:
                 CommandInteractions.displayError(sender, "Invalid subcommand.");
                 showHelp(sender, commandLabel);

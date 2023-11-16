@@ -1,10 +1,10 @@
 package io.github.projecthsi.mobarena.commands.mobarenaadmin;
 
-import io.github.projecthsi.mobarena.commands.CommandInteractions;
 import io.github.projecthsi.mobarena.FillArea;
 import io.github.projecthsi.mobarena.arena.Arena;
-import io.github.projecthsi.mobarena.containers.Container.Containers.arenaContainer;
 import io.github.projecthsi.mobarena.arena.SpawnPoint;
+import io.github.projecthsi.mobarena.commands.CommandInteractions;
+import io.github.projecthsi.mobarena.containers.Container;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.Location;
 import org.bukkit.command.CommandSender;
@@ -42,7 +42,7 @@ public class SpawnPointManagement {
         Arena arenaInstance;
 
         try {
-            arenaInstance = Container.Containers.arenaContainer.getInstance().getArena(arenaName);
+            arenaInstance = Container.Containers.arenaContainer.getTracked(arenaName);
         } catch (Exception e) {
             CommandInteractions.displayError(sender, "That arena does not exist.");
 
@@ -80,7 +80,7 @@ public class SpawnPointManagement {
         Arena arenaInstance;
 
         try {
-            arenaInstance = Container.Containers.arenaContainer.getInstance().getArena(arenaName);
+            arenaInstance = Container.Containers.arenaContainer.getTracked(arenaName);
         } catch (Exception e) {
             CommandInteractions.displayError(sender, "That arena does not exist.");
 

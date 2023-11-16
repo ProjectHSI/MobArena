@@ -1,0 +1,32 @@
+// This file contains some definitions used inside Mob Arena that don't belong in other files.
+// It contains things like FillArea.
+syntax = "proto3";
+
+package mob_arena;
+
+option java_multiple_files = true;
+option java_package = "io.github.projecthsi.mobarena.protobuf";
+option java_outer_classname = "MobArenaOuter";
+
+import "mc.proto";
+//import "arena.proto";
+
+message FillArea {
+  Location startPosition = 1;
+  Location endPosition = 2;
+  World world = 3;
+}
+
+message SpawnPoint {
+  string name = 1;
+  FillArea fillArea = 2;
+}
+
+message MobSpawnEntry {
+  EntityType entityType = 1;
+  uint32 amount = 2;
+  uint32 spawnRound = 3;
+  uint32 modulo = 4;
+  string spawnPoint = 5;
+  bool countTowardsLimit = 6;
+}

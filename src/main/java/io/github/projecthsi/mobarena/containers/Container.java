@@ -25,39 +25,39 @@ public class Container<I, V> {
     }
 
     public void addTracked(I index, V value) {
-        try {
-            writeLock.lock();
+        //try {
+        //    writeLock.lock();
             tracked.put(index, value);
-        } finally {
-            writeLock.unlock();
-        }
+        //} finally {
+        //    writeLock.unlock();
+        //}
     }
 
     public void removeTracked(I index) {
-        try {
-            writeLock.lock();
+        //try {
+        //    writeLock.lock();
             tracked.remove(index);
-        } finally {
-            writeLock.unlock();
-        }
+        //} finally {
+        //    writeLock.unlock();
+        //}
     }
 
     public V getTracked(I index) {
-        try {
-            readLock.lock();
+        //try {
+        //    readLock.lock();
             return tracked.get(index);
-        } finally {
-            readLock.unlock();
-        }
+        //} finally {
+        //    readLock.unlock();
+        //}
     }
 
     public boolean containsTracked(I index) {
-        try {
-            readLock.lock();
+        //try {
+        //    readLock.lock();
             return tracked.containsKey(index);
-        } finally {
-            readLock.unlock();
-        }
+        //} finally {
+        //    readLock.unlock();
+        //}
     }
 
     /**

@@ -34,7 +34,7 @@ public class PlayerManagement {
             return false;
         }
 
-        if (Container.Containers.arenaContainer.containsTracked(args[1])) {
+        if (!Container.Containers.arenaContainer.containsTracked(args[1])) {
             CommandInteractions.displayError(sender, "That arena does not exist.");
 
             return false;

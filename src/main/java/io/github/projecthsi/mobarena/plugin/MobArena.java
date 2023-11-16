@@ -1,9 +1,11 @@
 package io.github.projecthsi.mobarena.plugin;
 
 import io.github.projecthsi.mobarena.EventSystem;
+import io.github.projecthsi.mobarena.arena.Arena;
 import io.github.projecthsi.mobarena.commands.MiniMessageTest;
 import io.github.projecthsi.mobarena.commands.mobarenaadmin.MobArenaAdmin;
 import io.github.projecthsi.mobarena.commands.mobarenadebug.MobArenaDebug;
+import io.github.projecthsi.mobarena.containers.Container;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public final class MobArena extends JavaPlugin {
@@ -20,11 +22,15 @@ public final class MobArena extends JavaPlugin {
         getServer().getCommandMap().register("MobArenaAdmin", ":", new MobArenaAdmin());
         getServer().getCommandMap().register("MobArenaDebug", ":", new MobArenaDebug());
         EventSystem.registerEvents();
+
+        io.github.projecthsi.mobarena.dev.FullLog.doFullLog(this, -1);
     }
 
     @Override
     public void onDisable() {
-        // Plugin shutdown logic
+        for (Arena arena : Container.Containers.arenaContainer.getTracked().values()) {
+            arena.stop();
+        }
     }
 
     public static MobArena getInstance() {
