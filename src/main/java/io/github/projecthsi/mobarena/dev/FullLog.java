@@ -59,7 +59,13 @@ public class FullLog {
     }
 
     private static Component generateBanner(Object object, int recursion) {
-        final String bannerPlaceHolder = "<indenture> <package><class> <static-color>Full Log</static-color> <indenture>";
+        String bannerPlaceHolder;
+
+        if (recursion == 1) {
+            bannerPlaceHolder = "<indenture> <package><class> <static-color>Full Log</static-color> <indenture>";
+        } else {
+            bannerPlaceHolder = "<indenture> <package><class> <indenture>";
+        }
 
         return MiniMessage.miniMessage().deserialize(bannerPlaceHolder,
                 generateBannerIndenture(recursion),
@@ -103,7 +109,7 @@ public class FullLog {
     }
 
     private static TagResolver generateKVClass(Object object) {
-        String className = object.getClass().getName();
+        String className = object.getClass().getSimpleName();
 
         TagResolver classColor = Placeholder.styling("class-color", classTextColor);
         TagResolver classPlaceholder = Placeholder.unparsed("class", className);
@@ -112,7 +118,7 @@ public class FullLog {
     }
 
     private static Component generateKV(String key, Object value, int recursion) {
-        final String bannerPlaceHolder = "<indenture> <package><class>";
+        final String bannerPlaceHolder = "<indenture> <key> (<package><class>): <value>";
 
         return MiniMessage.miniMessage().deserialize(bannerPlaceHolder,
                 generateKVIndenture(recursion),
@@ -138,7 +144,7 @@ public class FullLog {
 
         logger.severe(ansiComponentSerializer.serialize(generateBanner(object, currentRecursion)));
 
-        for (Field declaredField : object.getClass().getDeclaredFields()) {
+        for (Field declaredField : object.getClass().getFields()) {
             try {
                 logger.severe(ansiComponentSerializer.serialize(generateKV(declaredField.getName(), declaredField.get(object), currentRecursion)));
 
@@ -153,7 +159,7 @@ public class FullLog {
             }
         }
 
-        for (Method declaredMethod : object.getClass().getDeclaredMethods()) {
+        for (Method declaredMethod : object.getClass().getMethods()) {
             try {
                 /* we need to do some checking otherwise we might be running code that breaks the class (setters, for
                 instance.). but we also need to check if the method takes no arguments (we don't pass any special
