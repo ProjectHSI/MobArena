@@ -175,8 +175,8 @@ public class FullLog {
             }
         }
 
-        for (Object object : objectsToBeAnalyzed) {
-            doFullLog(object, maxRecursion, currentRecursion);
+        for (Object newObject : objectsToBeAnalyzed) {
+            doFullLog(newObject, maxRecursion, currentRecursion);
         }
 
         logger.severe(ansiComponentSerializer.serialize(generateBanner(object, currentRecursion)));
