@@ -8,7 +8,7 @@ import io.github.projecthsi.mobarena.protobuf.Config;
 */
 
 class ForeignConfigReader {
-    private
+    //private
 }
 
 class ConfigReader {
@@ -19,6 +19,6 @@ class ConfigReader {
     public void testFunction() {
         io.github.projecthsi.mobarena.protobuf.Config.Builder builder = Config.newBuilder();
 
-        builder.
+        //builder.
     }
 }
